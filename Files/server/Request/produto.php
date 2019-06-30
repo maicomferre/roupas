@@ -1,5 +1,9 @@
 <?php require_once('../produtos.php'); ?>
 <?php
+/*
+	@Retorna a informações de 
+
+*/
 	if((!isset($_POST['categoria']) || empty($_POST['categoria'])) && (!isset($_POST['ProdutoID']) || empty($_POST['ProdutoID'])))
 	{
 		http_response_code(400);

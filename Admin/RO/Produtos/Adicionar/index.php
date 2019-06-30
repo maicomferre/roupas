@@ -65,13 +65,67 @@
 				</div>
 				
 				<div class="display" id="opt_5" style="display:none;">
-				
+					<h1>Selecione a categoria</h1>
+					<select id="select_opt5">
+						<option value="default" disabled selected>Selecionar</option> 
+						<option value="cat-masculino">Masculina</option>
+						<option value="cat-masculino_infantil">Masculina Infantil</option>
+						<option value="cat-feminino">Feminina</option>
+						<option value="cat-feminino_infantil">Feminina Infantil</option>
+						<option value="cat-pets">Pets</option>
+						<option value="cat-outra">Outras</option>
+					</select>	
+					
+					<br />
+					<br />
+					<hr />
+					<h1>Digite Palavras Chaves para encontrar este produto</h1>
+					<h6>Estas palavras chaves serão utilizadas em mecanismos de pesquisa, tanto externo<wbr /> quanto interno.(no próprio site)</h6>
+					<input type="text" placeholder="Palavras-Chaves(KeyWords): Ex: camisa,regata,manga" />
 				</div>
 				
 				<div class="display" id="opt_6" style="display:none;">
-				
+					<h1>Selecione a cor principal do produto</h1>
+					<input type="color" />
+					<br />
+					<br />
+					<hr />
+					<h1 id="sec_color">Cor secundária?</h1>
+					<input type="color" id="color2" style="display:none;" />
+					<input type="checkbox" class="color2" id="sec_color_input" value="Não" onClick="script:$('#sec_color').html('Selecione a cor secundária');$('#color2').show('slow');"/>
 				</div>
-
+				
+				<div class="display" id="opt_7" style="display:none;">
+					<h1>Selecione o tamanho disponível</h1>
+					<table>
+						<tr>
+							<th>Tamanho</th>
+							<th>Quantidade</th>
+						</tr>
+						<tr>
+							<td>Pequeno Pequeno [PP]</td>
+							<td><input type="number" value="0" /></td>
+						</tr>
+						<tr>
+							<td>Pequeno [P]</td>
+							<td><input type="number" value="0" /></td>
+						</tr>
+						<tr>
+							<td>Médio [M]</td>
+							<td><input type="number" value="0" /></td>
+						</tr>
+						<tr>
+							<td>Grande [G]</td>
+							<td><input type="number" value="0" /></td>
+						</tr>
+						<tr>
+							<td>Grande Grande [GG]</td>
+							<td><input type="number" value="0" /></td>
+						</tr>						
+					</table>
+				</div>
+				
+				
 				<br  /><br />
 				<div class="botoes">
 					<button class="bottao" onClick="view('next');" id="btn0" >Iniciar Cadastro</button>
