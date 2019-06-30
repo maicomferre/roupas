@@ -1,20 +1,16 @@
+<?php require_once('../../../../Files/server/include/contas.funcoes.php'); ?>
 <?php
 	/*
 		@Desenvolvido por: Maicom Ferreira
-		@Data: 07/2017
+		@Data: 07/2017 - 06/2019
 		@Descrição: Painel de controle de produtos do site de roupas.
 	
 	*/
-	if(!isset($_COOKIE['asdkmslw']))
-	{
-		header("Location: http://".$_SERVER['HTTP_HOST']);
+	session_start();
+	
+	if(!Logado() or Cargo() < 2){
+		header('Location: ../../');
 		exit;
-	}else{
-		if($_COOKIE['asdkmslw'] != 'LIUHERTNMHLDSKJUHYEGRHJKM')
-		{
-			header("Location: http://".$_SERVER['HTTP_HOST']);
-			exit;
-		}
 	}
 ?>
 <!DOCTYPE html>
@@ -23,7 +19,7 @@
 		<title>Administração de Roupas Online - Produtos Info</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="0_0@_F0i0les/_dSDsSfwer_QWEASD.css" />
-		<script type="text/javascript" src="/jquery-3.1.0.min.js">var Request=false;var Out=0;</script>
+		<script type="text/javascript" src="../../../../jquery-3.1.0.min.js">var Request=false;var Out=0;</script>
 		<script><?php
 			if((!isset($_GET['listar']) || empty($_GET['listar'])) && (!isset($_GET['ProdutoID']) || empty($_GET['ProdutoID'])))
 			{
@@ -93,42 +89,12 @@
 			<div class="Objeto" title="Exibe uma lista dos produtos com o numero de vezes que foram comprados e o usuario chegou ao produto por um dos anuncios: email e outros metodos">
 				<p id="title">Comprados por Anuncio</p><hr />
 				<p id="subtitle">Exibe uma lista das estatisticas de marketing(Anuncios)</p>
-			</div>	
-			<div class="Objeto" title="">
-				<p id="title"></p><hr />
-				<p id="subtitle"></p>
-			</div>	
-			<div class="Objeto" title="">
-				<p id="title"></p><hr />
-				<p id="subtitle"></p>
-			</div>	
-			<div class="Objeto" title="">
-				<p id="title"></p><hr />
-				<p id="subtitle"></p>
-			</div>	
-			<div class="Objeto" title="">
-				<p id="title"></p><hr />
-				<p id="subtitle"></p>
-			</div>	
-			<div class="Objeto">
-				<p id="title"></p><hr />
-				<p id="subtitle"></p>
-			</div>				
+			</div>		
 		</div>
 		<div class="Selecionar_categoria">
 			<form action="" method="get" id="form">
 				<select id="listar" name="listar" title="Por favor, Selecione a categoria." onChange="javascript:$('#form').submit();">
-				<?php
-					$fopen = fopen('../../../../p88oiu77jjhj66fg33bjdgbnfjhdgbjerg88nfjhdnfjh390747833b44n56486v422mb3n4d5mbc\Config_x\Categorias_registradas.ini','r');
-					$explode = explode(',',fgetss($fopen));
-					fclose($fopen);$i=0;
-					echo "<option selected value=\"-1\">Selecione a Categoria</option>";
-					while((isset($explode[$i])) !== false)
-					{
-						echo '<option value="'.$explode[$i].'">'.$explode[$i].'</option>';
-						$i++;
-					}
-				?>
+
 				</select>
 			</form>
 		</div>

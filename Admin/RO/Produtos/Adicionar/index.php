@@ -38,6 +38,9 @@
 					<h1>Diga o nome do produto a ser vendido</h1>
 					<br /><hr />
 					<input type="text" placeholder="Diga o nome do produto" maxlength="100" />
+					<br /><hr />
+					<h3>Informe a quantidade deste produto disponivel no estoque</h3>
+					<input type="number" value="0" />
 				</div>
 				
 				<div class="display" id="opt_2" style="display:none;">

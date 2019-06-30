@@ -4,7 +4,7 @@
 
 
 */
-if(strtolower($_SERVER['HTTP_METHOD']) !== 'post'){
+if(strtolower($_SERVER['REQUEST_METHOD']) !== 'post'){
 	http_response_code(403);
 	exit();
 }
