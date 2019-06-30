@@ -7,10 +7,10 @@
 	if($_POST['login'] == 'roupasonline@hotmail.com' && $_POST['pass'] == '1023')
 	{
 		setcookie('asdkmslw','LIUHERTNMHLDSKJUHYEGRHJKM',0,'/');
-		sleep(2);
+		#sleep(2);
 		header("Location: /Admin/RO");
 		exit();
 	}else{
-		header("Location: http://.$_SERVER['HTTP_HOST']);
+		header("Location: ../../../");
 	}
 ?>

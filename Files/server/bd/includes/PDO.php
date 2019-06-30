@@ -4,7 +4,7 @@
 	define('password','');
 	define('db','roupas');
 	$pdo = new PDO('mysql:host='.HOST.';dbname='.db.';charset=utf8',USER,password);
-
+	#$pdo->
 
 
 if(defined('dev')){

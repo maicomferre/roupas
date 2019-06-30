@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$.ajax({
-		url:'../../server/Request/produto.php',
+		url:'../Files/server/Request/produto.php',
 		method:'POST',
 		data:{
 			'produtoID':pro_id,

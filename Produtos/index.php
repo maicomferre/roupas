@@ -23,7 +23,7 @@
 		<div class="Titulo">
 			<img id="image0" src="../Files/img/Camisa0.gif" />
 			<img id="image1" src="../Files/img/Camisa1.gif" />
-			<p id="Title"><a href="../" style="text-decoration:none;">Venda de Roupas Online - Pagina Inicial</a></p>
+			<p id="Title"><a href="../" style="text-decoration:none;">Venda de Roupas Online - Produtos</a></p>
 			<p id="SubTitle">Compre aqui, roupa para toda a família</p>
 			
 			<p id="credits">Desenvolvido por: Maicom Ferreira</p>
