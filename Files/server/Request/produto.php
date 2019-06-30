@@ -1,4 +1,4 @@
-<?php require_once('../Files/server/produtos.php'); ?>
+<?php require_once('../produtos.php'); ?>
 <?php
 	if((!isset($_POST['categoria']) || empty($_POST['categoria'])) && (!isset($_POST['ProdutoID']) || empty($_POST['ProdutoID'])))
 	{
@@ -6,23 +6,6 @@
 		exit();
 	}
 	$ProdutoID = $_POST['produtoID'] ?? -1;
-	
-	/*$Categoria = strtolower($_POST['categoria']);
-	$Metodos = array(
-		'masculino' => 'masculino/',
-		'feminino' => 'masculino/',
-		'masculino-infantil' => 'masculino/infantil/',
-		'feminino-infantil' => 'feminino/infantil/',
-		'sapatos-masculino' => 'sapatos/masculino/', 
-		'sapatos-feminino' => 'sapatos/feminino/',
-		'animais-domesticos' => 'animail/'
-	);
-	
-	if(array_key_exists($Categoria,$Metodos) === false)
-	{
-		http_response_code(400);
-		exit();
-	}*/
 	
 	if(isset($_POST['produtoID']))
 	{
@@ -34,7 +17,7 @@
 
 		if(count($re) < 1)
 		{
-			echo json_encode(array('prod'=>'0'));
+			echo json_encode(array('indice'=>'0'));
 			exit();						
 		}
 		

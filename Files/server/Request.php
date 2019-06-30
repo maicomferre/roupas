@@ -9,7 +9,7 @@
 	{
 		header("Content-Type: application/json; charset=utf-8");
 		
-		$result = $pdo->prepare('SELECT * FROM `produto`');
+		$result = $pdo->prepare('SELECT * FROM `produto` LIMIT 20');
 		
 		$result->execute();
 	
