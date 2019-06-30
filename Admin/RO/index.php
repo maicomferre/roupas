@@ -1,14 +1,10 @@
+<?php require_once('../../Files/server/include/contas.funcoes.php'); ?>
 <?php
-	if(!isset($_COOKIE['asdkmslw']))
-	{
-		header("Location: http://".$_SERVER['HTTP_HOST']);
+	session_start();
+	
+	if(!Logado() or Cargo() < 2){
+		header('Location: ../../');
 		exit;
-	}else{
-		if($_COOKIE['asdkmslw'] != 'LIUHERTNMHLDSKJUHYEGRHJKM')
-		{
-			header("Location: http://".$_SERVER['HTTP_HOST']);
-			exit;			
-		}
 	}
 ?>
 <!DOCTYPE html>
