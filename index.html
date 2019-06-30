@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Roupas Online - Pagina Inicial</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="Files/css/_Pagina_Index.css" charset="utf-8" media="screen and (min-width:429px)" />
+		<link rel="stylesheet" type="text/css" href="Files/css/PaginaIndex_Width-429px-width_.css" media="screen and (max-width: 429px)" />
+		<script type="text/javascript" src="jquery-3.1.0.min.js" language="javascript"></script>
+		<script type="text/javascript" src="Files/js/_Pagina_Index.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<div class="Titulo">
+			<img id="image0" src="Files/img/Camisa0.gif" />
+			<img id="image1" src="Files/img/Camisa1.gif" />
+			<p id="Title">Venda de Roupas Online - Pagina Inicial</p>
+			<p id="SubTitle">Compre aqui, roupa para toda a família</p>
+			<p id="credits">Desenvolvido por: Maicom Ferreira</p>
+		</div>
+		<nav id="naveounavegando">
+		<ol id="olid">
+			<a href="Produtos?categoria=masculino" target="_blank"><li id="Olid0" onmouseover="AbrirListaMenu('Masculino',this)" onmouseout="ListaMenuFechar();">Masculino</li></a>
+			<a href="Produtos?categoria=feminino" target="_blank"><li id="Olid1" onmouseover="AbrirListaMenu('Feminino',this)" onmouseout="ListaMenuFechar();" >Feminino</li></a>
+			<a href="Produtos?categoria=masculino-infantil" target="_blank"><li id="Olid2" onmouseover="AbrirListaMenu('masculino-infantil',this)" onmouseout="ListaMenuFechar();">Masculino -  Infantil</li></a>
+			<a href="Produtos?categoria=feminino-infantil" target="_blank"><li id="Olid3" onmouseover="AbrirListaMenu('feminino-infantil',this)" onmouseout="ListaMenuFechar();" >Feminino - Infantil</li></a>
+			<a href="Produtos?categoria=sapatos-masculino" target="_blank"><li id="Olid4" onmouseover="AbrirListaMenu('sapatos-masculino',this)" onmouseout="ListaMenuFechar();" >Sapatos Masculino</li></a>
+			<a href="Produtos?categoria=sapatos-feminino" target="_blank"><li id="Olid5" onmouseover="AbrirListaMenu('sapatos-feminino',this)" onmouseout="ListaMenuFechar();" >Sapatos Feminino</li>	</a>
+			<a href="Produtos?categoria=animais-domesticos" target="_blank"><li id="Olid6" onmouseover="AbrirListaMenu('animais-domesticos',this)" onmouseout="ListaMenuFechar();" >Animais Domesticos</li></a>
+			<div class="Conteudo_Links" style="display:none;">
+				<div class="Seta">&nbsp;</div><br />
+			</div>			
+		</ol>
+		</nav>
+		<div class="Conteudo">
+		<p onClick="Filtros('Exibir')" id="Filtros_botao">Filtros</p>
+			<p id="MaisVendidosTitle">Mais Vendidos</p>
+			<div class="listamaisvendidos">
+				<center>
+					<img src="loading2.gif" /><br />
+					<h3>Por favor, Aguarde!</h3>
+				</center>
+			</div>
+		</div>
+	</body>
+</html>
+
+<!--
+	Site criado por Maicom Ferreira para aprendizado na pratica
+	Praticando a interface do site no html/css/js e a interactividade com js
+	e o lado do servidor no PHP para adicionar filtros por
+	cor/idade(para 20/15/6/7 anos)/por tipo (G/M/GG)/Tipo de roupa, Calça/cueca,Cueca Box,outros/Camisa/Casaco.
+-->	
