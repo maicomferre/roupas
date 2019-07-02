@@ -138,7 +138,7 @@ function Filtros(acao){
 }
 $(document).ready(function(){
 	var rl = $.ajax({
-		url:'Files/server/Request.php?Roupas=all',
+		url:'Files/server/request/?Roupas=all',
 		method:'GET',
 		cache:false,
 		dataType:"json"

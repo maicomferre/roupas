@@ -1,4 +1,4 @@
-<?php require_once('bd/includes/PDO.php'); ?>
+<?php require_once('../bd/includes/PDO.php'); ?>
 <?php
 	if(!isset($_GET['Roupas']) OR empty($_GET['Roupas']))
 	{
