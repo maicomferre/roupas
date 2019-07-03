@@ -11,6 +11,6 @@ function Cargo():int
 {
 	return $_SESSION['Cargo'] ??  3;
 }
-
+//Sessão
 
 ?>

@@ -1,3 +1,5 @@
+"use strict";
+
 var ROUPA = [];
 var ROUPA_Indice = 0;
 var FILTRO = [];
@@ -5,12 +7,14 @@ var FILTRO_Indice = 0;
 var Imagens0Carregadas = 0;
 function CriarRoupa(retorno)
 {
+	var img = retorno['imagens'].split(',');
+
+	
 	ROUPA[ROUPA_Indice] = []; 
-	
-	img = retorno['imagens'].split(',');
-	
+		
 	ROUPA[ROUPA_Indice]['Imagem'] = img[0];
 	ROUPA[ROUPA_Indice]['Imagem2'] = img[1];
+	ROUPA[ROUPA_Indice]['ImagemAtual'] = false;
 	ROUPA[ROUPA_Indice]['Valor_Original'] = retorno['val'];
 	ROUPA[ROUPA_Indice]['ProdutoID'] = retorno['ProdutoID'];
 	ROUPA[ROUPA_Indice]['ValorDesconto'] = retorno['Desconto'];
@@ -18,13 +22,20 @@ function CriarRoupa(retorno)
 	ROUPA[ROUPA_Indice]['Genero'] = retorno['Genero'];
 	ROUPA[ROUPA_Indice]['Centralizacao_X'] = retorno['CT_X'];
 	ROUPA[ROUPA_Indice]['Centralizacao_Y'] = retorno['CT_Y'];
-	ROUPA[ROUPA_Indice]['Descricao'] = retorno['Descricao'];
+	ROUPA[ROUPA_Indice]['Descricao'] =  retorno['Descricao'];
 	ROUPA[ROUPA_Indice]['Imagem_Indice'] = 0;
 	var HTML = '';
-	HTML  =	'<div class="ListObject" onmousemove="AlterarImagem(this);" title="'+ROUPA[ROUPA_Indice]['Descricao']+'" id="'+ROUPA_Indice+'"><a href="Produtos/?categoria='+ExtensoGenero(ROUPA[ROUPA_Indice]['Genero'])+'&ProdutoID='+ROUPA[ROUPA_Indice]['ProdutoID']+'"><img src="Produtos/img/'+ROUPA[ROUPA_Indice]['Imagem']+'" ></div>';
+	
+	HTML  =	'<div class="ListObject" onmouseover="AlterarImagem(\'obj_roupa_img-'+ROUPA_Indice+'\',1)" \
+		onmouseout="AlterarImagem(\'obj_roupa_img-'+ROUPA_Indice+'\',0)""\
+		title="'+ ROUPA[ROUPA_Indice]['Descricao'].substr(0,30) +'" id="obj_roupa_'+ROUPA_Indice+'">\
+		<a href="Produtos/?categoria='+ExtensoGenero(ROUPA[ROUPA_Indice]['Genero'])+'&ProdutoID='+ROUPA[ROUPA_Indice]['ProdutoID']+'">\
+		<img src="Produtos/img/'+ROUPA[ROUPA_Indice]['Imagem']+'" id="obj_roupa_img-'+ROUPA_Indice+'"></div>';
+	
 	$('.listamaisvendidos').html($('.listamaisvendidos').html()+HTML);
 	ROUPA_Indice++;
 }
+
 function Filtro_Adicionar(filtro,tipo)
 {
 	if(filtro === 'genero')
@@ -112,7 +123,25 @@ function ExtensoGenero(genero)
 		}
 	return genero;
 }
-function AlterarImagem (elemento){
+function AlterarImagem (elemento,tp){
+	/*if(typeof document.getElementById(elemento) === undefined)return;
+	var id = elemento.split('-')[1];
+	
+	if(tp == 1)
+	{
+		if(ROUPA[id]['ImagemAtual'] === false){
+			setTimeout(function(){
+				if(ROUPA[id]['ImagemAtual'] !== true){
+					$('#'+elemento).attr('src', 'Produtos/img/'+ ROUPA[id]['Imagem2']);
+					ROUPA[id]['ImagemAtual'] = true;
+				}
+			},1500);
+		}
+	}else{
+		$('#'+elemento).attr('src', 'Produtos/img/'+ ROUPA[id]['Imagem']);
+		ROUPA[id]['ImagemAtual'] = false;
+	}*/
+	//ROUPA[id]['ImagemAtual'] = !ROUPA[id]['ImagemAtual'];
 	
 }
 var ABRIRLISTAMENU =false;

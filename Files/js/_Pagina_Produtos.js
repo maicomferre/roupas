@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 function ConstruirProduto(Dados){
 	var Valor = 0;
-	if(Dados['Desconto'] == 1)
+	if(typeof Dados['ValorDesconto'] !== undefined)
 	{
 		Valor = Dados['ValorDesconto'];	
 	}else{
@@ -26,7 +26,7 @@ function ConstruirProduto(Dados){
 	
 	for(var i=0; i<IMGS; i++)
 	{
-		OutrasImg = OutrasImg+'<img src="../Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
+		OutrasImg = OutrasImg + '<img src="../Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
 	}
 	
 	txt = '';

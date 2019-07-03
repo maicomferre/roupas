@@ -18,7 +18,7 @@
 	<head>
 		<title>Administração de Roupas Online - Produtos Info</title>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="0_0@_F0i0les/_dSDsSfwer_QWEASD.css" />
+		<link rel="stylesheet" type="text/css" href="src/produtos.admin.index.css" />
 		<script type="text/javascript" src="../../../../jquery-3.1.0.min.js">var Request=false;var Out=0;</script>
 		<script><?php
 			if((!isset($_GET['listar']) || empty($_GET['listar'])) && (!isset($_GET['ProdutoID']) || empty($_GET['ProdutoID'])))
