@@ -29,18 +29,18 @@
 						<h1>Adicionar um novo produto</h1>
 						<h2>Você está prestes a adicionar um produto</h2>
 						
-						<h4>Lembre-se que não é necessário preencher tudo agora<br />Você pode começar
-						o pre-cadastro e continuar mais tarde</h4>
+						<!--<h4>Lembre-se que não é necessário preencher tudo agora<br />Você pode começar
+						o pre-cadastro e continuar mais tarde</h4>-->
 					</center>
 					<br /><br /><br />
 				</div>
 				<div class="display" id="opt_1" style="display:none;">
 					<h1>Diga o nome do produto a ser vendido</h1>
 					<br /><hr />
-					<input type="text" placeholder="Diga o nome do produto" maxlength="100" />
+					<input type="text" id="produto_nome" placeholder="Diga o nome do produto" maxlength="100" />
 					<br /><hr />
 					<h3>Informe a quantidade deste produto disponivel no estoque</h3>
-					<input type="number" value="0" />
+					<input type="number" id="produto_quantidade" value="0" />
 				</div>
 				
 				<div class="display" id="opt_2" style="display:none;">

@@ -12,7 +12,7 @@
 	<head>
 		<title>Administração de Roupas Online</title>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="0_0@_F0i0les/_dSDsSfwer_QWEASD.css" />
+		<link rel="stylesheet" type="text/css" href="src/admin.ro.index.css" />
 	</head>
 	<body>
 		<div class="Fundo_Menu">
