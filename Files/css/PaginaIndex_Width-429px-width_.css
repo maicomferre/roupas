@@ -1,13 +1,13 @@
+@charset "utf-8";
 /*
 	@Desenvolvido por: Maicom Ferreira
 	@Data: 07/2017 
 */
-@charset "utf-8";
 *{
 	padding:0;
 }
 body{
-	background-image:url('background.png');
+	background-image:url('../img/background.png');
 }
 .Titulo{
 	position:relative;
@@ -29,7 +29,7 @@ body{
 	top:0px;
 	font-family:Jazz LET, fantasy,Comic Sans, Comic Sans MS, cursive;
 	text-align:center;
-	font-size:19px;
+	font-size:18px;
 	text-shadow:2px 2px rgba(0,0,0,.2);
 }
 .Titulo #SubTitle{
@@ -74,9 +74,8 @@ body{
 a{
 	color:#000000;
 }
-#olid li{
+#olid,#naveounavegando{
 	display:none;
-	
 }
 /*------------------------- CONTEUDO ------------------------- */
 .Conteudo{
