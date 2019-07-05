@@ -21,6 +21,7 @@
 		</div>
 		<br /><br />
 			<div class="Conteudo">
+				<span id="alerta_erro" style="#display:none;">Erro! Um erro errado está calsando algum erro estranhamente errado que não esta certo</span>
 				<div class="anterior" style="display:none;">
 				
 				</div>
@@ -37,7 +38,7 @@
 				<div class="display" id="opt_1" style="display:none;">
 					<h1>Diga o nome do produto a ser vendido</h1>
 					<br /><hr />
-					<input type="text" id="produto_nome" placeholder="Diga o nome do produto" maxlength="100" />
+					<input type="text" autofocus id="produto_nome" placeholder="Diga o nome do produto" maxlength="100" />
 					<br /><hr />
 					<h3>Informe a quantidade deste produto disponivel no estoque</h3>
 					<input type="number" id="produto_quantidade" value="0" />
@@ -46,24 +47,38 @@
 				<div class="display" id="opt_2" style="display:none;">
 					<h1>Diga o preço do produto</h1>
 					<br /><hr />
-					<input type="text" placeholder="Diga o preço do produto" maxlength="100" />
+					<input type="text" id="produto_preco" autofocus placeholder="Diga o preço do produto" maxlength="100" />
 				</div>
 				
 				<div class="display" id="opt_3" style="display:none;">
 					<h1>Descreva o produto</h1>
-					<textarea cols="190" rows="15"></textarea>
+					<textarea cols="190" rows="15" autofocus id="text"></textarea>
 				</div>
 				
 				<div class="display" id="opt_4" style="display:none;">
 					<h1>Adicione até 5 imagens</h1>
 					<div class="img">
-						<img id="imagen_opcao" src="" />
-						<img id="imagen_opcao" src="" />
-						<img id="imagen_opcao" src="" />
-						<img id="imagen_opcao" src="" />
-						<img id="imagen_opcao" src="" />
-					</div><br /><br /><br />
-					<input type="file" multiple id="imgadd" />
+						<img id="imagen_opcao0" src="" />
+						<img id="imagen_opcao1" src="" />
+						<img id="imagen_opcao2" src="" />
+						<img id="imagen_opcao3" src="" />
+						<img id="imagen_opcao4" src="" />
+					</div><br /><br /><br /><br />
+					<button>
+						<input type="file" multiple id="imgadd" />
+					</button>
+					<button>
+						<input type="file" multiple id="imgadd" />
+					</button>
+					<button>
+						<input type="file" multiple id="imgadd" />
+					</button>
+					<button>
+						<input type="file" multiple id="imgadd" />
+					</button>
+					<button>
+						<input type="file" multiple id="imgadd" />
+					</button>
 					<br /><br /><br />
 				</div>
 				

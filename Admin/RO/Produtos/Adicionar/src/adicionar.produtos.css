@@ -60,3 +60,9 @@ textarea{
 .display td{
 	border: 1px solid #AAA;
 }
+#alerta_erro{
+	font-size:16px;
+	text-align:center;
+	color:#EE5555;
+	display:none;
+}

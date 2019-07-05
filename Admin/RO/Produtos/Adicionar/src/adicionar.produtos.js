@@ -1,22 +1,28 @@
 var Produto = {};
-
+var ElementoEmErro = undefined;
 
 
 var loaded = false;
 $(document).ready(function(){
 	loaded = true;
 
+	$(document).keypress(function(e){
+		if(e.wich == 13 || e.keyCode == 13){
+			view('next');
+		}
+	})
 });
 
 var view_opt = 1;
 function view(opt){
 	if(opt == 'next'){
-		if(!validar_opcao(opt)){
+		
+		if(validar_opcao(view_opt-1) === false){
 			return false;
 		}
 		
 		if(view_opt >= 1){
-			$('#btn0').html('Próximo');
+			$('#btn0').html('Próximo');			
 		}
 		
 		$('#opt_'+(view_opt-1)).toggle('slow');
@@ -35,32 +41,87 @@ function view(opt){
 }
 function validar_opcao(opt)
 {
-	if(opt == '1')
+	if(opt == 1)
 	{
 		var prod_name = document.getElementById('produto_nome');
 		var quant = document.getElementById('produto_quantidade');
 		
+		if(prod_name === undefined || prod_name === null || quant === undefined || quant === null){
+			alert('Algo de errado não deu certo! Parece que sua pagina não foi carregada corretamente ou você está fazendo algo que não devia!');
+			return false;
+		}
+		VerificarSeTemQRemover();
+		quant = parseInt(quant.value);
 		
-		if(typeof prod_name === undefined || typeof quant === undefined){
+		if(prod_name.value.length < 10){
+			MessageEx('#produto_nome',"Nome do produto: O nome do produto deve conter pelo menos 10 caracteres para ser melhor descrito!");
+			return false;
+		}
+		else if(prod_name.value.length > 100){
+			MessageEx('#produto_nome',"Nome do produto:O produto deve ter no máximo 100 caracteres para não ficar com um titulo demasiadamente grande.");
+			return false;
+		}
+		
+		Produto['nome'] = prod_name.value;
+		
+		if(isNaN(quant)){
+			document.getElementById('produto_quantidade').focus();
+			MessageEx('#produto_quantidade',"Quantidade: Verifique se o valor digitado é um número");
+			return false;			
+		}
+		else if(quant === 0){
+			document.getElementById('produto_quantidade').focus();
+			MessageEx('#produto_quantidade',"Quantidade: Por favor, informe a quantidade disponível no estoque");
+			return false;
+		}
+		
+		Produto['quantidade']  = quant;
+	}
+	else if(opt == '2')
+	{
+		var quant = document.getElementById('produto_preco');
+		
+		if(quant === undefined || quant === null){
+			alert('Algo de errado não deu certo! Parece que sua pagina não foi carregada corretamente ou você está fazendo algo que não devia!');
+			return false;			
+		}
+		
+		var preco = parseFloat(quant.value);
+		
+		if(isNaN(preco)){
+			quant.focus();
+			MessageEx('#produto_preco',"Quantidade: Verifique se o valor digitado é um número");
+			return false;				
+		}
+		else if(preco < 0){
+			quant.focus();
+			MessageEx('#produto_preco',"Preço: Verifique o preço do produto. Deve ser maior ou igual a 0(gratis)");
+			return false;			
+		}
+
+		Produto['preco'] = preco;
+	}
+	else if(opt == '3')
+	{
+		var txt = document.getElementById('text').value;
+		
+		if(txt === undefined || txt === null){
 			alert('Algo de errado não deu certo! Parece que sua pagina não foi carregada corretamente ou você está fazendo algo que não devia!');
 			return false;
 		}
 		
-		if(prod_name.Length < 10){
-			MessageEx('#produto_nome',"O nome do produto deve conter pelo menos 10 caracteres para ser melhor descrito!");
+		if(txt.length === 0){
+			document.getElementById('text').focus();
+			MessageEx('#text',"Descrição: Desceva o produto");
 			return false;
 		}
-		else if(prod_name.Length > 100){
-			MessageEx('#produto_quantidade',"O produto deve ter no máximo 100 caracteres para não ficar com um titulo demasiadamente grande.");
-			return false;
+		else if(txt.length > 500){
+			document.getElementById('text').focus();
+			MessageEx('#text',"Máximo de 500 caracteres!");
+			return false;			
 		}
 		
-	
-	}else if(opt == '2')
-	{
-		
-	}else if(opt == '3')
-	{
+		Produto['descricao'] = txt;
 		
 	}else if(opt == '4')
 	{
@@ -80,7 +141,32 @@ function validar_opcao(opt)
 	}else if(opt == '9')
 	{
 		
-	}else 
+	}
 	
+	if(ElementoEmErro !== undefined){
+		MessageExRemove(ElementoEmErro);
+		ElementoEmErro = undefined;
+	}	
+	
+	return true;
+}
+
+function MessageEx(elemento,texto){
+	ElementoEmErro = elemento;
+	$(elemento).css({'border':'1px solid #EE0000'});
+	$('#alerta_erro').html(texto);
+	$('#alerta_erro').hide();
+	$('#alerta_erro').show('fat');
+		
+}
+function MessageExRemove(elemento){
+	$(elemento).css({'border':'1px solid #555555'});
+	$('#alerta_erro').hide();
+}
+function VerificarSeTemQRemover(){
+	if(ElementoEmErro !== undefined){
+		MessageExRemove(ElementoEmErro);
+		ElementoEmErro = undefined;
+	}	
 	
 }
