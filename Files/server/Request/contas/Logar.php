@@ -1,9 +1,17 @@
+<?php require_once('../include/class.usuario.php'); ?>
 <?php
 /*
 	Verifica login do usuário
-
-
 */
+
+$user = new Usuario();
+
+if($user->Logado() === true){
+	$user->SetMensagem('aviso','Você já está logado!');
+	header('../../../../');
+	exit;
+}
+
 if(strtolower($_SERVER['REQUEST_METHOD']) !== 'post'){
 	http_response_code(403);
 	exit();
