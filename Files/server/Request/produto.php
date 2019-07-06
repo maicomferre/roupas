@@ -1,5 +1,4 @@
-<?php #require_once('/include/produtos.php'); ?>
-<?php require_once('../bd/includes/PDO.php'); ?>
+<?php require_once('../bd/PDO.php'); ?>
 
 <?php
 
