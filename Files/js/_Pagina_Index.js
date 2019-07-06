@@ -15,9 +15,9 @@ function CriarRoupa(retorno)
 	ROUPA[ROUPA_Indice]['Imagem'] = img[0];
 	ROUPA[ROUPA_Indice]['Imagem2'] = img[1];
 	ROUPA[ROUPA_Indice]['ImagemAtual'] = false;
-	ROUPA[ROUPA_Indice]['Valor_Original'] = retorno['val'];
+	ROUPA[ROUPA_Indice]['Valor_Original'] = retorno['valor'];
 	ROUPA[ROUPA_Indice]['ProdutoID'] = retorno['ProdutoID'];
-	ROUPA[ROUPA_Indice]['ValorDesconto'] = retorno['Desconto'];
+	ROUPA[ROUPA_Indice]['ValorDesconto'] = retorno['ValorDesconto'];
 	ROUPA[ROUPA_Indice]['Tipo'] = retorno['Tipo'];
 	ROUPA[ROUPA_Indice]['Genero'] = retorno['Genero'];
 	ROUPA[ROUPA_Indice]['Centralizacao_X'] = retorno['CT_X'];
@@ -25,12 +25,18 @@ function CriarRoupa(retorno)
 	ROUPA[ROUPA_Indice]['Descricao'] =  retorno['Descricao'];
 	ROUPA[ROUPA_Indice]['Imagem_Indice'] = 0;
 	var HTML = '';
+	var valor = ROUPA[ROUPA_Indice]['Valor_Original'];
+	if(ROUPA[ROUPA_Indice]['ValorDesconto'] > 0 && ROUPA[ROUPA_Indice]['Valor_Original'] != ROUPA[ROUPA_Indice]['ValorDesconto']){
+		valor = ROUPA[ROUPA_Indice]['ValorDesconto'];
+		$('#roupa_precoAntigo').show();
+	}
 	
 	HTML  =	'<div class="ListObject" onmouseover="AlterarImagem(\'obj_roupa_img-'+ROUPA_Indice+'\',1)" \
 		onmouseout="AlterarImagem(\'obj_roupa_img-'+ROUPA_Indice+'\',0)""\
 		title="'+ ROUPA[ROUPA_Indice]['Descricao'].substr(0,30) +'" id="obj_roupa_'+ROUPA_Indice+'">\
 		<a href="Produtos/?categoria='+ExtensoGenero(ROUPA[ROUPA_Indice]['Genero'])+'&ProdutoID='+ROUPA[ROUPA_Indice]['ProdutoID']+'">\
-		<img src="Produtos/img/'+ROUPA[ROUPA_Indice]['Imagem']+'" id="obj_roupa_img-'+ROUPA_Indice+'"></div>';
+		<img src="Produtos/img/'+ROUPA[ROUPA_Indice]['Imagem']+'" id="obj_roupa_img-'+ROUPA_Indice+'" />\
+		<span class="roupa_preco">R$: '+valor+'</span><span id="roupa_precoAntigo" style="display:none;"> &nbsp;&nbsp;<del>'+ROUPA[ROUPA_Indice]['Valor_Original']+'</del></span><br /></div>';
 	
 	$('.listamaisvendidos').html($('.listamaisvendidos').html()+HTML);
 	ROUPA_Indice++;
