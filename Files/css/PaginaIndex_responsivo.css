@@ -1,0 +1,52 @@
+@charset "utf-8";
+/*
+	@Desenvolvido por: Maicom Ferreira
+	@Data: 07/2017 
+*/
+.Titulo{
+	height:173px;
+}
+.Titulo #Title{
+	font-size:18px;
+}
+.Titulo #SubTitle{
+	font-size:20px;
+}
+/*------------------------- MENU ------------------------- */
+
+#naveounavegando{
+	display:none;
+}
+/*------------------------- CONTEUDO ------------------------- */
+.Conteudo{
+	top:15px;
+	left:0px;
+	min-width:120px;
+}
+#MaisVendidosTitle{
+	font-size:21px;
+}
+/*------------------------- CONTEÚDO: Lista Mais Vendidos ------------------------- */
+.listamaisvendidos{
+	position:relative;
+	top:1px;
+	left:40px;
+	min-width:200px;
+	border:1px solid #EFEFEF;
+	padding:4px;
+	margin:0px;
+}
+.ListObject{
+	margin:5px;
+	width:100%;
+	max-width:255px;
+	min-width:120px;	
+	height:225px;	
+}
+.ListObject img{
+	position:relative;
+	width:calc(99.4% -10px);
+	max-width:220px;
+	min-width:120px;
+	height:210px;
+}

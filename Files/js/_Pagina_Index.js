@@ -36,7 +36,7 @@ function CriarRoupa(retorno)
 		title="'+ ROUPA[ROUPA_Indice]['Descricao'].substr(0,30) +'" id="obj_roupa_'+ROUPA_Indice+'">\
 		<a href="Produtos/?categoria='+ExtensoGenero(ROUPA[ROUPA_Indice]['Genero'])+'&ProdutoID='+ROUPA[ROUPA_Indice]['ProdutoID']+'">\
 		<img src="Produtos/img/'+ROUPA[ROUPA_Indice]['Imagem']+'" id="obj_roupa_img-'+ROUPA_Indice+'" />\
-		<span class="roupa_preco">R$: '+valor+'</span><span id="roupa_precoAntigo" style="display:none;"> &nbsp;&nbsp;<del>'+ROUPA[ROUPA_Indice]['Valor_Original']+'</del></span><br /></div>';
+		<span class="roupa_preco">R$: '+valor+'</span><span id="roupa_precoAntigo" style="display:none;"> <sup>&nbsp;&nbsp;<del>'+ROUPA[ROUPA_Indice]['Valor_Original']+'</del></sup></span><br /></div>';
 	
 	$('.listamaisvendidos').html($('.listamaisvendidos').html()+HTML);
 	ROUPA_Indice++;

@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../Files/css/_Pagina_Index.css" charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="../Files/css/_Pagina_Produtos.css" charset="utf-8" media="screen and (min-width: 935px)" />
+		<link rel="stylesheet" type="text/css" href="../Files/css/_Pagina_Produtos_responsivo.css" charset="utf-8" media="(min-width: 935px)" />
 		<!--
 				@Desenvolvido por: Maicom Ferreira
 				@Data: Começo: 07/2017
