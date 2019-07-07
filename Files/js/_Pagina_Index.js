@@ -130,24 +130,6 @@ function ExtensoGenero(genero)
 	return genero;
 }
 function AlterarImagem (elemento,tp){
-	/*if(typeof document.getElementById(elemento) === undefined)return;
-	var id = elemento.split('-')[1];
-	
-	if(tp == 1)
-	{
-		if(ROUPA[id]['ImagemAtual'] === false){
-			setTimeout(function(){
-				if(ROUPA[id]['ImagemAtual'] !== true){
-					$('#'+elemento).attr('src', 'Produtos/img/'+ ROUPA[id]['Imagem2']);
-					ROUPA[id]['ImagemAtual'] = true;
-				}
-			},1500);
-		}
-	}else{
-		$('#'+elemento).attr('src', 'Produtos/img/'+ ROUPA[id]['Imagem']);
-		ROUPA[id]['ImagemAtual'] = false;
-	}*/
-	//ROUPA[id]['ImagemAtual'] = !ROUPA[id]['ImagemAtual'];
 	
 }
 var ABRIRLISTAMENU =false;

@@ -3,20 +3,8 @@
 	@Desenvolvido por: Maicom Ferreira
 	@Data: 07/2017 
 */
-.Titulo{
-	height:173px;
-}
-.Titulo #Title{
-	font-size:18px;
-}
-.Titulo #SubTitle{
-	font-size:20px;
-}
 /*------------------------- MENU ------------------------- */
 
-#naveounavegando{
-	display:none;
-}
 /*------------------------- CONTEUDO ------------------------- */
 .Conteudo{
 	top:15px;
@@ -39,14 +27,34 @@
 .ListObject{
 	margin:5px;
 	width:100%;
-	max-width:255px;
-	min-width:120px;	
+	max-width:225px;
+	min-width:10px;	
 	height:225px;	
 }
 .ListObject img{
 	position:relative;
-	width:calc(99.4% -10px);
+	width:100%;
 	max-width:220px;
-	min-width:120px;
+	min-width:100px;
 	height:210px;
+}
+@media (max-width: 390px){
+
+	.listamaisvendidos{
+		left:0px;
+		width:calc(100% - 10px);
+	}
+}
+@media (max-width:300px){
+	.listamaisvendidos{
+		left:0px;
+		margin:0;
+		padding:0px;
+	}
+	.Conteudo{
+		left:0px;
+		padding:0;
+		margin:0;
+		width:100vw;
+	}
 }
