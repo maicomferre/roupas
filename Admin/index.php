@@ -1,15 +1,19 @@
-<?php require_once('..\Files\server\include\contas.funcoes.php'); ?>
+<?php require_once('..\Files\server\include\class.usuario.php'); ?>
 <?php
-	session_start();
+	$u = new Usuario();
 	
+	#>>>>temporário
+	header('Location: ro/');
+	exit;
+	#>>>>temporário
 
-	if(!Logado())
+	if(!$u->Logado())
 		
 		header("Location: Admin/login");
 
-	else if(Logado() && Cargo() < 2)
+	else if($u->Cargo() < 2)
 		
 		header("Location: ../");
-	else if(Logado() && Cargo() > 1)
+	else if(Cargo() > 1)
 		header('Location: ro/');
 ?>	

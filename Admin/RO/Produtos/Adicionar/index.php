@@ -3,7 +3,7 @@
 	<head>
 		<title>Roupas Online - Pagina Inicial</title>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="../../../../Files/css/_Pagina_Index.css" charset="utf-8" media="screen and (min-width:429px)" />
+		<link rel="stylesheet" type="text/css" href="../../../../Files/css/Global.css" charset="utf-8" media="screen and (min-width:429px)" />		
 		<link rel="stylesheet" type="text/css" href="../../../../Files/css/PaginaIndex_Width-429px-width_.css" media="screen and (max-width: 429px)" />
 		<link rel="stylesheet" type="text/css" href="src/adicionar.produtos.css" />
 		<script type="text/javascript" src="../../../../jquery-3.1.0.min.js" language="javascript"></script>

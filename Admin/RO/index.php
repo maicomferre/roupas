@@ -1,10 +1,11 @@
-<?php require_once('../../Files/server/include/contas.funcoes.php'); ?>
+<?php require_once('../../Files/server/include/class.usuario.php'); ?>
 <?php
-	session_start();
+	$u = new Usuario();
 	
-	if(!Logado() or Cargo() < 2){
-		header('Location: ../../');
-		exit;
+	
+	if(!$u->Logado() or $u->Cargo() < 2){
+		#header('Location: ../../');
+		#exit;
 	}
 ?>
 <!DOCTYPE html>

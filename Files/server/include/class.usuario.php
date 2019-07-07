@@ -30,7 +30,7 @@ class Usuario
 	
 	function TempoRestante():int
 	{
-		if(isset($_SESSION['CLogado'])
+		if(isset($_SESSION['CLogado']))
 			return -1;
 		else
 			return $_SESSION['limite'] - time();
@@ -53,6 +53,11 @@ class Usuario
 				'tipo' => $tipo,
 				'msg' => $msg
 			);
+	}
+	
+	function Logar($data){
+		
+		
 	}
 }
 
