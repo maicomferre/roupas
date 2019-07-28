@@ -13,9 +13,9 @@ $(document).ready(function(){
 
 function ConstruirProduto(Dados){
 	var Valor = 0;
-	if(typeof Dados['ValorDesconto'] !== undefined)
+	if(Dados['ValorDesconto'] !== undefined)
 	{
-		Valor = Dados['ValorDesconto'];	
+		Valor = Dados['ValorDesconto'];
 	}else{
 		Valor = Dados['valor'];
 		$('#descontovalorantigo').hide();
@@ -25,9 +25,7 @@ function ConstruirProduto(Dados){
 	var IMGS = Dados['num_imagens'];
 	
 	for(var i=0; i<IMGS; i++)
-	{
 		OutrasImg = OutrasImg + '<img src="../Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
-	}
 	
 	txt = '';
 	

@@ -8,9 +8,11 @@ $(document).ready(function(){
 
 	$(document).keypress(function(e){
 		if(e.wich == 13 || e.keyCode == 13){
-			view('next');
+			if($('input,textarea').is(':focus') === false){
+				view('next');
+			}
 		}
-	})
+	});
 });
 
 var view_opt = 1;
