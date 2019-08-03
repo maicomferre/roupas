@@ -1,6 +1,7 @@
 var Produto = {};
 var ElementoEmErro = undefined;
 
+var tamanhoDisponivelUsadoProd = 0;
 
 var loaded = false;
 $(document).ready(function(){
@@ -125,19 +126,28 @@ function validar_opcao(opt)
 		
 		Produto['descricao'] = txt;
 		
-	}else if(opt == '4')
+	}
+	else if(opt == '4')
 	{
 		
-	}else if(opt == '5')
+	}
+	else if(opt == '5')
 	{
 		
-	}else if(opt == '6')
+	}
+	else if(opt == '6')
+	{
+	
+
+		//Para o opt = 7
+		document.getElementById('set_qntEstoque').innerHTML = Produto['quantidade'];
+		document.getElementById('set_qntDistribuida').innerHTML = tamanhoDisponivelUsadoProd;
+	}
+	else if(opt == '7')
 	{
 		
-	}else if(opt == '7')
-	{
-		
-	}else if(opt == '8')
+	}
+	else if(opt == '8')
 	{
 		
 	}else if(opt == '9')

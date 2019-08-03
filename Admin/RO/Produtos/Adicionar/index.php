@@ -85,15 +85,14 @@
 				<div class="display" id="opt_5" style="display:none;">
 					<h1>Selecione a categoria</h1>
 					<select id="select_opt5">
-						<option value="default" disabled selected>Selecionar</option> 
+						<option value="cat-default" disabled selected>Selecionar</option> 
 						<option value="cat-masculino">Masculina</option>
 						<option value="cat-masculino_infantil">Masculina Infantil</option>
 						<option value="cat-feminino">Feminina</option>
 						<option value="cat-feminino_infantil">Feminina Infantil</option>
 						<option value="cat-pets">Pets</option>
 						<option value="cat-outra">Outras</option>
-					</select>	
-					
+					</select>
 					<br />
 					<br />
 					<hr />
@@ -115,6 +114,10 @@
 				
 				<div class="display" id="opt_7" style="display:none;">
 					<h1>Selecione o tamanho disponível</h1>
+					<p>
+						<b>Quantidade Em Estoque:</b> <span id="set_qntEstoque">[ERRO JAVASCRIPT]</span><br />
+						<b>Quantidade distribuída</b> <span id="set_qntDistribuida">[ERRO JAVASCRIPT]</span><br />
+					</p>
 					<table>
 						<tr>
 							<th>Tamanho</th>
@@ -122,23 +125,23 @@
 						</tr>
 						<tr>
 							<td>Pequeno Pequeno [PP]</td>
-							<td><input type="number" value="0" /></td>
+							<td><input type="number" id="qnt_pp" value="0" /></td>
 						</tr>
 						<tr>
 							<td>Pequeno [P]</td>
-							<td><input type="number" value="0" /></td>
+							<td><input type="number" id="qnt_p" value="0" /></td>
 						</tr>
 						<tr>
 							<td>Médio [M]</td>
-							<td><input type="number" value="0" /></td>
+							<td><input type="number" id="qnt_m" value="0" /></td>
 						</tr>
 						<tr>
 							<td>Grande [G]</td>
-							<td><input type="number" value="0" /></td>
+							<td><input type="number" id="qnt_g" value="0" /></td>
 						</tr>
 						<tr>
 							<td>Grande Grande [GG]</td>
-							<td><input type="number" value="0" /></td>
+							<td><input type="number" id="qnt_gg" value="0" /></td>
 						</tr>						
 					</table>
 				</div>
