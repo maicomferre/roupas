@@ -8,6 +8,7 @@ $(document).ready(function(){
 		},
 		success:function(data){ConstruirProduto(data);},
 		dataType:'json',
+		cache:false,
 	});
 });
 
@@ -27,23 +28,26 @@ function ConstruirProduto(Dados){
 	for(var i=0; i<IMGS; i++)
 		OutrasImg = OutrasImg + '<img src="../Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
 	
-	txt = '';
+	txt = '<p id="Titulo_Produto">' + Dados['nome'] + '</p><div class="objeto">';
 	
 	txt +=	'<div class="OutrasImg">'+OutrasImg+'</div>';
 	
 	txt +=	'<img src="../Produtos/img/'+Dados.imagens[0]+'" id="ImgCentrProduto" />';
 	
-	txt +=	'	<p id="Titulo_Produto">'+Dados['nome']+'</p>';
+	txt +=	'</div><div class="objeto">';
 	
-	txt +=	'	<p id="Valor">R$: '+Valor+'</p> <p id="descontovalorantigo">R$: '+ (Dados['valor']) +' </p>';
+	txt +=	'	<p id="Valor">R$: '+Valor+' <span id="descontovalorantigo"><sub><del>R$: '+ (Dados['valor']) +'<del> </sub></span></p>';
 	
-	txt +=	'	<p id="TextCor">Selecione a Cor</p>';
+	//txt +=	'<p id="TextCor">Selecione a Cor</p>';
+	
+	
+	txt +=	'<p id="Descricao"><span id="descreva">Descrição:</span><br />\
+		'+Dados['Descricao']+'<span onClick="descricao.maisMenos();" id="MaisDetalhes"> &nbsp;Mais Detalhes</span></p>';
 	
 	txt +=	'	<select id="Cores" title="Selecionar cor">';
-	txt +=	'		<option value="VERDE" selected>Azul</option>';
-	txt +=	'	</select><br />';
-	
-	txt +=	'<p id="Descricao">'+Dados['Descricao']+'<span onClick="javascript:window.location.href=\'#Mais\';" id="MaisDetalhes"> &nbsp;Mais Detalhes</span></p>';
+	txt +=	'		<option value="-1" selected disabled>Selecione a cor</option>';
+	txt +=	'		<option value="VERDE">Azul</option>';
+	txt +=	'	</select><br />';	
 	
 	txt +=	'<div class="SelecionarTamanho">';
 	txt +=	'<p id="STAM0">P</p>\
@@ -54,7 +58,7 @@ function ConstruirProduto(Dados){
 			
 	txt +=	'</div>';
 	txt +=	'<img src="../Files/img/5estrela.png" id="NumeroEstrelas" />';
-	txt +=	'<p id="numEstrelas"><b>5</b> &nbsp;(1 avaliação)</p><br /><br /><br />';
+	txt +=	'<p id="numEstrelas"><b>5</b> &nbsp;(1 avaliação)</p></div><br /><div class="objeto comentários"></div>';
 	
 	$('.Conteudo').html(txt);	
 	

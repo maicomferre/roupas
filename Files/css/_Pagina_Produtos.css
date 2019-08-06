@@ -13,7 +13,7 @@
 }
 .Conteudo #ImgCentrProduto{
 	position:absolute;
-	top:0px;
+	top:50px;
 	left:130px;
 	max-width:400px;
 	max-height:400px;
@@ -31,7 +31,7 @@
 }
 .Conteudo .OutrasImg img{
 	position:relative;
-	top:10px;
+	top:25px;
 	left:5px;
 	width:80px;
 	height:85px;
@@ -74,55 +74,47 @@
 }
 .Conteudo #Titulo_Produto{
 	position:absolute;
-	top:0px;
-	left:50%;
+	top:0;
 	margin:3px;
 	font-size:25px;
+	#left:15vw;
+	text-align:center;
 	font-weight:bold;
-	width:calc(100% - 50%);
 }
 .Conteudo #Valor{
 	position:absolute;
-	top:65px;
-	left:50%;
-	margin:3px;
+	left:0px;
 	font-size:28px;
 	color:#575757;
 	width:calc(100% - 50%);
-}
-.Conteudo #descontovalorantigo{
-	position:absolute;
-	top:71px;
-	left:800px;
-	margin:3px;
-	font-size:22px;
-	color:#6A6A6A;
-	width:calc(100% - 800px);
-	text-decoration: line-through;
 }
 .Conteudo #TextCor{
 	display:none;
 	position:absolute;
 	width:calc(100% - 50%);
-	top:90px;
-	left:50%;
+	#top:90px;
+	#left:50%;
 	font-size:14px;
 }
 .Conteudo #Cores{
-	position:absolute;
-	width:calc(100% - 50% - 300px);
-	top:120px;
-	left:50%;
-	height:60px;
+	position:relative;
+	#width:calc(100% - 50% - 300px);
+	top:300px;
+	padding:10px;
+	font-size:18px;
 }
 .Conteudo #Descricao{
 	position:absolute;
-	top:200px;
-	left:50%;
+	top:80px;
 	margin:3px;
 	font-size:18px;
 	color:#454545;
 	width:calc(100% - 50%);	
+}
+.Conteudo #descreva{
+	text-decoration:italic;
+	font-size:12px;
+	font-weight:bolder;
 }
 .Conteudo .SelecionarTamanho{
 	position:absolute;
@@ -140,6 +132,7 @@
 	border:1px solid #000000;
 	padding:5px;
 	margin:5px;
+	left:0;
 	width:40px;
 	height:40px;
 	color:#464646;
@@ -157,22 +150,42 @@
 }
 .Conteudo #NumeroEstrelas{
 	position:absolute;
-	top:440px;
-	left:10.25%;
+	bottom:0px;
+	left:0px;
 	margin:0px;
 	width:80px;	
 	opacity:0.67;
 }
 .Conteudo #numEstrelas{
 	position:absolute;
-	top:440px;
+	bottom:00px;
 	font-size:15px;
-	left:18.5%;
+	left:90px;
 	margin:0px;
 	color:#676767;
 	opacity:0.7;
 	width:calc(100% - 18.5%);
+	z-index:999;
 }
+.Conteudo .objeto{
+	position:relative;
+	display:inline-block;
+	min-height:525px;
+	float:left;
+	min-width:50%;
+	padding:0;
+	margin:0;
+}
+
+.Conteudo .comentários{
+	display:inline-block;
+	width:100%;
+	left:0px;
+	min-height:120px;
+	border:1px solid #888;
+
+}
+
 #MaisDetalhes{
 	text-decoration:underline;
 	color:#0080C0;
