@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+form{
+	position:relative;
+	margin:0 auto;
+	width:50vw;
+}
+
+input{
+	position:relative;
+	padding:10px;
+	margin:10px;
+	border-radius:4px;
+	box-shadow:3px 5px 10px #CCC;
+	min-width:130px;
+	width:100%;
+}
+label{
+	font-size:17px;
+	font-weight:bolder;
+	text-shadow:2px 2px 3px #E8F9AC;
+}
