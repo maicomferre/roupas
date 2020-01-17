@@ -155,7 +155,7 @@ function Filtros(acao){
 }
 $(document).ready(function(){
 	var rl = $.ajax({
-		url:'Files/server/request/?Roupas=all',
+		url:'Files/server/Request/?Roupas=all',
 		method:'GET',
 		cache:false,
 		dataType:"json"
@@ -171,7 +171,13 @@ $(document).ready(function(){
 		valor = valor[0];
 
 		$('.listamaisvendidos').html('');
-				
+
+		if(indice == 0)
+		{
+			$('.listamaisvendidos').html('<h1 style="color:red;">Não foi encontrado produtos em nosso servidor</h1>');
+			return;
+		}
+
 		for(var c=0; c<indice; c++)
 		{
 			if(valor[c] === undefined)continue;

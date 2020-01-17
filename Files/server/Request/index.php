@@ -1,5 +1,5 @@
 <?php require_once('../bd/PDO.php'); ?>
-<?php require_once('../include/class.usuario.php'); ?>
+<?php require_once('../Files/server/include/class.usuario.php'); ?>
 <?php
 	$user = new Usuario();
 	
@@ -14,11 +14,19 @@
 		{
 			header("Content-Type: application/json; charset=utf-8");
 			
-			$result = $pdo->prepare('SELECT * FROM `produto` LIMIT 20');
+			$a = array();
+
+			try{
+				$result = $pdo->prepare('SELECT * FROM `produto` LIMIT 20');
 			
-			$result->execute();
+				$result->execute();
 		
-			$a = $result->fetchAll();
+				$a = $result->fetchAll();
+			}
+			catch(Exception $e)
+			{
+				$a = array($a,"error" => $e.getMessage());
+			}
 
 			$a = array($a,'indice' => count($a));
 			

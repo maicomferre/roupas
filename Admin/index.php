@@ -1,4 +1,4 @@
-<?php require_once('..\Files\server\include\class.usuario.php'); ?>
+<?php require_once('../Files/server/include/class.usuario.php'); ?>
 <?php
 	$u = new Usuario();
 	
