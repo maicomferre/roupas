@@ -1,5 +1,5 @@
 <?php require_once('../bd/PDO.php'); ?>
-<?php require_once('../Files/server/include/class.usuario.php'); ?>
+<?php require_once('../include/class.usuario.php'); ?>
 <?php
 	$user = new Usuario();
 	
@@ -38,7 +38,7 @@
 	{
 		$ProdutoID = $_POST['produtoID'] ?? -1;
 		
-		$result = $pdo -> prepare('SELECT * FROM `produto` WHERE produtoid= :pro_id');
+		$result = $pdo -> prepare('SELECT * FROM `produto` WHERE produtoid=:pro_id');
 		$result->bindParam(":pro_id",$ProdutoID);
 		$result->execute();
 

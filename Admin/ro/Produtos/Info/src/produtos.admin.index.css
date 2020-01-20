@@ -1,0 +1,78 @@
+@charset "UTF-8";
+body{
+	background-color:rgba(0,0,0,0.4);
+}
+.Fundo{
+	display:inline-table;
+	margin:0 auto;
+	position:relative;
+	top:0px;
+	width:calc(100% - 5%);
+	height:600px;
+	border:1px solid rgba(5,5,5,.4);
+	box-shadow:6px 6px 3px rgba(5,5,5,.4);
+	-moz-box-shadow:6px 6px 3px rgba(5,5,5,.4);
+	-webkit-box-shadow:6px 6px 3px rgba(5,5,5,.4);
+	-ms-box-shadow:6px 6px 3px rgba(5,5,5,.4);
+	-o-box-shadow:6px 6px 3px rgba(5,5,5,.4);
+	-khtml-box-shadow:6px 6px 3px rgba(5,5,5,.4);
+	border-radius:2px;
+	background-color:#FFFFFF;
+}
+.Fundo #title{
+	text-align:center;
+	font-size:25px;
+	font-weight:bold;
+	text-shadow:1px 1px rgba(7,7,7,.2);
+}
+.Fundo .Objeto{
+	position:relative;
+	font-family:"Trebuchet MS",sans-serif;
+	margin:5px;
+	padding:7px;
+	width:230px;
+	height:146px;
+	border:1px solid rgba(5,5,5,.36);
+	box-shadow:4px 4px 3px rgba(5,5,5,.4);
+	-moz-box-shadow:4px 4px 3px rgba(5,5,5,.4);
+	-webkit-box-shadow:4px 4px 3px rgba(5,5,5,.4);
+	-ms-box-shadow:4px 4px 3px rgba(5,5,5,.4);
+	-o-box-shadow:4px 4px 3px rgba(5,5,5,.4);
+	-khtml-box-shadow:4px 4px 3px rgba(5,5,5,.4);
+	text-align:center;
+	float:left;
+	border-radius:4px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	background-color:#FFFFFF;	
+}
+.Fundo .Objeto:hover{
+	background-color:#EEEEEE;
+	cursor:pointer;
+}
+.Fundo .Objeto #title{
+	font-size:15px;
+}
+.Selecionar_categoria{
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color:rgba(255,255,255,.6);
+}
+.Selecionar_categoria select{
+	position:relative;
+	margin: 0 auto;
+	top:10px;
+	width:400px;
+	text-align:center;
+	left:calc(50% - 200px);
+	border-radius:5px;
+	height:80px;
+	font-size:29px;
+}
