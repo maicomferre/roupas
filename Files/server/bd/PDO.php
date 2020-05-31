@@ -1,13 +1,16 @@
 <?php
 	define('HOST','localhost');
 	define('USER','root');
-	define('password','1023');
+	define('password','');
 	define('db','loja_roupas');
+	//define('dev',true);
 
+	$pdo = new PDO('mysql:host='.HOST.';port=3306;charset=utf8',USER,password);
 
-	$pdo = new PDO('mysql:host='.HOST.';port=3306;dbname='.db.';charset=utf8',USER,password);
 
 if(defined('dev')){
+	$pdo->exec('CREATE DATABASE '.db);
+
 	$sql = 'CREATE TABLE `'.db.'`.`produto` ( `nome` VARCHAR(50) NOT NULL ,
 	 `preco` DOUBLE NOT NULL ,
 	  `data_criacao` DATE NOT NULL ,
@@ -24,7 +27,13 @@ if(defined('dev')){
 	             `anuncio` BOOLEAN NOT NULL , 
 	             `desativado` BOOLEAN NOT NULL ) ENGINE = InnoDB;';
 	
-	
-	$pdo = "INSERT INTO `produto` (nome,preco,visto,compras,avaliacao,ValorDesconto,cupom,criador_id,Descricao,ProdutoID,Categoria,Genero, imagens,anuncio,desativado,desconto,`data_criacao`) VALUES('Roupa social',685.84,13,112,5,384,0,2, 'Camisa social para se utilizada socialmente entre grupos sociais.',9600002,3,1,'produtoImagem.jpg,produtoImagem.jpg,produtoImagem.jpg',0,0,1,NOW());";
+	$pdo->exec($sql);
+
+	$sql =$pdo->prepare("INSERT INTO `produto` (nome,preco,visto,compras,avaliacao,cupom,criador_id,Descricao,ProdutoID,Categoria,Genero, imagens,anuncio,desativado,desconto,`data_criacao`) VALUES('Roupa social',685.84,13,112,5,0,2, 'Camisa social para se utilizada socialmente entre grupos sociais.',9600002,3,'M','produtoImagem.jpg,produtoImagem.jpg,produtoImagem.jpg',0,0,1,NOW());");
+
+	$sql->execute();
+}
+else{
+	$pdo->exec('USE '.db);
 }
 ?>

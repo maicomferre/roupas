@@ -15,7 +15,7 @@ function CriarRoupa(retorno)
 	ROUPA[ROUPA_Indice]['Imagem'] = img[0];
 	ROUPA[ROUPA_Indice]['Imagem2'] = img[1];
 	ROUPA[ROUPA_Indice]['ImagemAtual'] = false;
-	ROUPA[ROUPA_Indice]['Valor_Original'] = retorno['valor'];
+	ROUPA[ROUPA_Indice]['Valor_Original'] = retorno['preco'];
 	ROUPA[ROUPA_Indice]['ProdutoID'] = retorno['ProdutoID'];
 	ROUPA[ROUPA_Indice]['ValorDesconto'] = retorno['ValorDesconto'];
 	ROUPA[ROUPA_Indice]['Tipo'] = retorno['Tipo'];
