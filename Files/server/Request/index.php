@@ -17,11 +17,12 @@
 			$a = array();
 
 			try{
-				$result = $pdo->prepare('SELECT * FROM `produto` LIMIT 20');
+				$result = $pdo->prepare('SELECT * FROM `produto`');
 			
 				$result->execute();
 		
 				$a = $result->fetchAll();
+
 			}
 			catch(Exception $e)
 			{
@@ -31,8 +32,7 @@
 			$a = array($a,'indice' => count($a));
 			
 			echo json_encode($a);
-		}
-		
+		}	
 	}
 	else if(isset($_POST['produtoID']))
 	{

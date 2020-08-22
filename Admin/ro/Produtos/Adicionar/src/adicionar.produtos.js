@@ -77,7 +77,7 @@ function validar_opcao(opt)
 			return false;
 		}
 		
-		Produto['quantidade']  = quant;
+		Produto['quantidade']  = parseInt(quant);
 
 		//$('#btn1_d').show();
 
@@ -91,7 +91,8 @@ function validar_opcao(opt)
 			return false;			
 		}
 		
-		var preco = parseFloat(quant.value);
+		quant = quant.value.replace(',','.');
+		var preco = parseFloat(quant);
 		
 		if(isNaN(preco)){
 			quant.focus();
@@ -104,7 +105,7 @@ function validar_opcao(opt)
 			return false;			
 		}
 
-		Produto['preco'] = preco;
+		Produto['preco'] = parseFloat(preco);
 	}
 	else if(opt == '3')
 	{
@@ -168,6 +169,17 @@ function validar_opcao(opt)
 		document.getElementById('set_qntEstoque').innerHTML = Produto['quantidade'];
 		document.getElementById('set_qntDistribuida').innerHTML = tamanhoDisponivelUsadoProd;
 
+
+		console.log('6 aqui estive');
+		document.getElementById('nome').innerHTML = document.getElementById('produto_nome').value;
+		document.getElementById('qtn').innerHTML = document.getElementById('produto_quantidade').value;
+		document.getElementById('preco').innerHTML = document.getElementById('produto_preco').value;
+		document.getElementById('desc').innerHTML = document.getElementById('text').value;
+		document.getElementById('lucro').innerHTML = document.getElementById('produto_quantidade').value * document.getElementById('produto_preco').value;;
+		document.getElementById('cat').innerHTML = document.getElementById('select_opt5').value;
+		document.getElementById('key').innerHTML = document.getElementById('txt_keyword').value;
+		document.getElementById('cor1').innerHTML = '<div class="line" color="'+Produto['cor1']+'">&#8203;</div>';
+		document.getElementById('cor2').innerHTML = '<div class="line" color="'+Produto['cor2']+'">&#8203;</div>';	
 	}
 	else if(opt == '7')
 	{
@@ -194,10 +206,27 @@ function validar_opcao(opt)
 		Produto['Tamanhos']['m'] = qnt_m.value;
 		Produto['Tamanhos']['g'] = qnt_g.value;
 		Produto['Tamanhos']['gg'] = qnt_gg.value;
+
+		var result = (Produto['quantidade'] * Produto['preco']);
+
+
+		document.getElementById('nome').innerHTML = document.getElementById('produto_nome').value;
+		document.getElementById('qtn').innerHTML = Produto['quantidade'];
+		document.getElementById('preco').innerHTML = Produto['preco'];
+		document.getElementById('desc').innerHTML = document.getElementById('text').value;
+		document.getElementById('lucro').innerHTML = "R$ " + result.toFixed(2);
+		document.getElementById('cat').innerHTML = Produto['categoria'].replace('_', ' ');
+		document.getElementById('key').innerHTML = document.getElementById('txt_keyword').value;
+		document.getElementById('cor1').innerHTML = '<div class="line" style="background-color:'+Produto['cor1']+'">&#8203;</div>';
+		document.getElementById('cor2').innerHTML = '<div class="line" style="background-color:'+Produto['cor2']+'">&#8203;</div>';	
+		preview_images('img_img2');
+		send_data();	
+
 	}
 	else if(opt == '8')
 	{
-		
+
+
 	}
 	else if(opt == '9')
 	{
@@ -231,10 +260,10 @@ function VerificarSeTemQRemover(){
 	}	
 	
 }
-function preview_images()
+function preview_images(insertIn)
 {
 	var img = document.getElementById('imgadd0');
-	var imagen_opcao = document.getElementById('img_img');
+	var imagen_opcao = document.getElementById(insertIn);
 	document.getElementById('image_message').style.display = 'block';
 
 	if(img.files){
@@ -325,3 +354,22 @@ function tamn_quant_check()
 	distr.innerHTML = tamanhoDisponivelUsadoProd;
 }
 
+
+function send_data()
+{
+	$.ajax({
+		url:'../../../../Files/server/Request/admin.php?AddProduct',
+		data:{data:JSON.stringify(Produto)},
+		method:'POST',
+		dataType:'json',
+		success:function(a,b,c){
+			$('.debbug').html(a+b+c);
+		}
+	});
+
+	/*$request.done(function(){
+
+
+	});*/
+
+}

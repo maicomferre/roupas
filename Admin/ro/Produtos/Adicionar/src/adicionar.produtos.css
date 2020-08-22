@@ -75,3 +75,12 @@ textarea{
 	border:18px solid #CCC;
 	border:1px solid #000;
 }
+#lucro{
+	color:green;
+}
+.line{
+	width:50%;
+	padding:1px;
+	border-radius:8px;
+	border:1px solid #EEE;
+}

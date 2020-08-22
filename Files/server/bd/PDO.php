@@ -3,7 +3,7 @@
 	define('USER','root');
 	define('password','');
 	define('db','loja_roupas');
-	//define('dev',true);
+	#define('dev',true);
 
 	$pdo = new PDO('mysql:host='.HOST.';port=3306;charset=utf8',USER,password);
 

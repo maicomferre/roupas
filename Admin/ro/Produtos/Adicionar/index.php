@@ -8,8 +8,18 @@
 		<link rel="stylesheet" type="text/css" href="src/adicionar.produtos.css" />
 		<script type="text/javascript" src="../../../../jquery-3.1.0.min.js" language="javascript"></script>
 		<script type="text/javascript" src="src/adicionar.produtos.js" language="javascript"></script>
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>		
+				
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
 		<div class="Titulo">
@@ -61,7 +71,7 @@
 					<div class="img" id="img_img"></div>
 					<br /><br /><br /><br />
 					<button>
-						<input type="file" multiple id="imgadd0" onChange="preview_images();" />
+						<input type="file" multiple id="imgadd0" onChange="preview_images('img_img');" />
 					</button>
 					<br /><br /><br />
 				</div>
@@ -69,13 +79,13 @@
 				<div class="display" id="opt_5" style="display:none;">
 					<h1>Selecione a categoria</h1>
 					<select id="select_opt5">
-						<option value="cat-default" disabled selected>Selecionar</option> 
-						<option value="cat-masculino">Masculina</option>
-						<option value="cat-masculino_infantil">Masculina Infantil</option>
-						<option value="cat-feminino">Feminina</option>
-						<option value="cat-feminino_infantil">Feminina Infantil</option>
-						<option value="cat-pets">Pets</option>
-						<option value="cat-outra">Outras</option>
+						<option value="default" disabled selected>Selecionar</option> 
+						<option value="masculino">Masculina</option>
+						<option value="masculino_infantil">Masculina Infantil</option>
+						<option value="feminino">Feminina</option>
+						<option value="feminino_infantil">Feminina Infantil</option>
+						<option value="pets">Pets</option>
+						<option value="outra">Outras</option>
 					</select>
 					<br />
 					<br />
@@ -128,7 +138,64 @@
 					</table>
 				</div>
 				
-				
+				<div class="display" id="opt_8" style="display:none;">
+					<div class="container">
+						<div class="debbug"></div>
+						<div class="table table-striped">
+							<table>
+								<tr>
+									<th>Nome</th>
+									<th>Valor</th>
+								</tr>
+								<tr>
+									<td>Nome</td>
+									<td><span id="nome"></span></td>
+								</tr>
+								<tr>
+									<td>Quantidade</td>
+									<td id="qtn"></td>
+								</tr>
+								<tr>
+									<td>Preço</td>
+									<td id="preco"></td>
+								</tr>
+								<tr>
+									<td>Lucro Estimado</td>
+									<td id="lucro"></td>
+								</tr>
+								<tr>
+									<td>Descrição</td>
+									<td id="desc"></td>
+								</tr>
+								<tr>
+									<td>Imagens</td>
+									<td id="img"><div class="img2" id="img_img2"></div></td>
+								</tr>
+								<tr>
+									<td>Categoria</td>
+									<td id="cat"></td>
+								</tr>
+								<tr>
+									<td>Palavras Chave</td>
+									<td id="key"></td>
+								</tr>
+								<tr>
+									<td>Cor Primária</td>
+									<td id="cor1"></td>
+								</tr>
+								<tr>
+									<td>Cor secundária</td>
+									<td id="cor2"></td>
+								</tr>
+								<tr>
+									<td>Tamanhos </td>
+									<td id="tam"></td>
+								</tr>
+							</table>
+							<!--<button type="button" class="btn btn-primary">Enviar</button>-->
+						</div>
+					</div>
+				</div>
 				<br  /><br />
 				<div class="botoes">
 					<!--<button class="bottao" onClick="view('back');" style="display:none;" id="btn1_d" >Voltar</button>-->
