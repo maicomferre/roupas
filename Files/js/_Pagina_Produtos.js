@@ -14,12 +14,12 @@ $(document).ready(function(){
 
 function ConstruirProduto(Dados){
 	var Valor = 0;
-	if(Dados['ValorDesconto'] !== undefined)
+	if(Dados['ValorDesconto'] != undefined)
 	{
 		Valor = Dados['ValorDesconto'];
+
 	}else{
-		Valor = Dados['valor'];
-		$('#descontovalorantigo').hide();
+		Valor = Dados['preco'];
 	}
 	
 	var OutrasImg = '';
@@ -36,7 +36,7 @@ function ConstruirProduto(Dados){
 	
 	txt +=	'</div><div class="objeto">';
 	
-	txt +=	'	<p id="Valor">R$: '+Valor+' <span id="descontovalorantigo"><sub><del>R$: '+ (Dados['valor']) +'<del> </sub></span></p>';
+	txt +=	'	<p id="Valor">R$: '+Valor+' <span id="descontovalorantigo"><sub><del>R$: '+ (Dados['ValorDesconto']) +'<del> </sub></span></p>';
 	
 	//txt +=	'<p id="TextCor">Selecione a Cor</p>';
 	
@@ -60,6 +60,11 @@ function ConstruirProduto(Dados){
 	txt +=	'<img src="../Files/img/5estrela.png" id="NumeroEstrelas" />';
 	txt +=	'<p id="numEstrelas"><b>5</b> &nbsp;(1 avaliação)</p></div><br /><div class="objeto comentários"></div>';
 	
-	$('.Conteudo').html(txt);	
+	$('.Conteudo').html(txt);
+
+
+	if(Dados['ValorDesconto'] == undefined)
+			$('#descontovalorantigo').hide();
+	
 	
 }
