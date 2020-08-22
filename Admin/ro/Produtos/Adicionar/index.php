@@ -202,6 +202,17 @@
 					<button class="bottao" onClick="view('next');" id="btn0" >Iniciar Cadastro</button>
 				</div>
 				<br />
-			</div>	
+
+				<div class="send">
+					<button class="btn btn-primary" style="display:none;" id="message"></button>
+					<div class="send_image">
+						<div style="display:none" id="send_images_fail">
+							<button class="btn Danger" style="display:none;" id="error_1"></button> 
+							<button class="btn Danger" style="display:none;" id="error_2"></button> 
+							<button class="btn Danger" style="display:none;" id="error_3"></button> 
+						</div>
+					</div>
+				</div>
+			</div>
 	</body>
 </html>	

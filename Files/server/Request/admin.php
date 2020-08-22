@@ -39,7 +39,50 @@ if(isset($_GET['AddProduct'])){
 
 	$smt->execute();
 
+	echo $random;
 
+	exit;
+}
+if(isset($_GET['ModifyProduct'])){
+
+	if(!isset($_GET['productId']) OR empty($_GET['productId'])){
+			echo "<b>Erro:</b><br />Em ModifyProduct -> Identificação do produto não Enviada";
+			http_response_code(400);
+			exit;		
+	}
+	if(!isset($_GET['Replaceimages'])){
+		if(!isset($_FILES)){
+			echo "<b>Erro:</b><br />Em ModifyProduct&Replaceimages -> Arquivos Não Enviados";
+			http_response_code(400);
+			exit;
+		}
+	}
+	
+	$imagens = '';
+	print_r($_FILES);
+	foreach($_FILES['file']['error'] as $key => $error){
+
+		$ext = '.jpg';
+
+
+		if($error == UPLOAD_ERR_OK){
+			$newname = md5(random_bytes(12)).$ext;
+			if(move_uploaded_file($_FILES['file']['tmp_name'][$key], '../../../Produtos/img/'.$newname)){
+				$imagens .= $newname.',';
+			}
+		}
+	}
+	$smt = $pdo->prepare('UPDATE `produto` SET `imagens`=:img where `ProdutoID`=:id');
+
+	$smt->bindParam('id',$_GET['productId']);
+	$smt->bindParam('img',$imagens);
+
+
+	$smt->execute();
+
+
+	$smt->debugDumpParams();
+	exit;
 }
 
 function randomID(){
@@ -49,4 +92,9 @@ function randomID(){
 	}
 	return $a;
 }
+
+
+
+http_response_code(400);
+
 ?>

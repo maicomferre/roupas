@@ -363,13 +363,48 @@ function send_data()
 		method:'POST',
 		dataType:'json',
 		success:function(a,b,c){
-			$('.debbug').html(a+b+c);
+			$('.send').show('slow');
+			send_images(a);
 		}
 	});
+}
 
-	/*$request.done(function(){
+function send_images(a){
 
 
-	});*/
+	file = new FormData();
+	file.enctype = 'multipart/form-data';
+	file.method = 'post';
+	for(var i=0; i<Produto['Imagem'].length; i++){
+		file.append('file[]',Produto['Imagem'][i]);
+	}
+
+
+	$.ajax({
+		url:'../../../../Files/server/Request/admin.php?ModifyProduct&Replaceimages=all&productId=9932923',
+		data:file,
+		type:'POST',
+		contentType:false,
+		processData:false,
+		cache:false,
+		success:function(){
+			$('.send_image').show('slow');
+			$('#message').html('Imagens enviadas com sucesso');
+			$('#message').show('slow');
+		},
+		error:function(a,b,c){
+			$('.send_image').show('slow');
+			$('#send_images_fail').show('slow');
+			$('#error_1').html(a);
+			$('#error_2').html(b);
+			$('#error_3').html(c);
+
+			for(var i=100,c=1; i<=300; i+=100,c++){
+				setTimeout(function(){
+					$('#error_'+c).show('slow');
+				},i);
+			}	
+		}
+	});
 
 }
