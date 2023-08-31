@@ -13,6 +13,7 @@ if(isset($_GET['AddProduct'])){
 		'categoria'=>'',
 		'keywords'=>'',
 		'Tamanhos'=>'',
+		'Genero'=>'',
 	);
 
  	$a = json_decode($_POST['data']);
@@ -26,16 +27,18 @@ if(isset($_GET['AddProduct'])){
 	}
 	$random = randomID();
 	$preco = ($data['preco']);
+	$criadorid = 0;
 
 
-
-	$smt = $pdo->prepare("INSERT INTO `produto`(`nome`, `preco`, `Descricao`, `ProdutoID`, `Categoria`, `imagens`) VALUES (:nome,:preco,:descricao,:id,:categoria,'')");
+	$smt = $pdo->prepare("INSERT INTO `produto`(`nome`, `preco`, `Descricao`, `ProdutoID`, `Categoria`, `imagens`,`data_criacao`,`visto`,`compras`,`avaliacao`,`desconto`,`cupom`,`criador_id`,`Genero`,`anuncio`,`desativado`) VALUES (:nome,:preco,:descricao,:id,:categoria,'',NOW(),0,0,0,0,'',:criadorid,:genero,false,false)");
 
 	$smt->bindParam('nome',$data['nome']);
 	$smt->bindParam('preco',$preco);
 	$smt->bindParam('descricao',$data['descricao']);
 	$smt->bindParam('categoria',$data['categoria']);
 	$smt->bindParam('id',$random);
+	$smt->bindParam('criadorid',$criadorid);
+	$smt->bindParam('genero',$data['Genero']);
 
 	$smt->execute();
 

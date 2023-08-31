@@ -35,6 +35,21 @@ function view(opt){
 	else if(opt == 'back'){
 		if(view_opt == 1)return 0;
 
+	}
+	else if(opt == 'reset'){
+		$('input').trigger();
+
+		for(var x=0; x<view_opt; x++){
+			$('#opt_'+x).hide();
+		}
+
+		view_opt = 0;
+		$('#opt_'+0).show('hide');
+
+		Produto = {};
+
+
+
 	}else{
 		alert('function view(opt='+opt+'); parametro opt inválido');
 	}
@@ -169,8 +184,6 @@ function validar_opcao(opt)
 		document.getElementById('set_qntEstoque').innerHTML = Produto['quantidade'];
 		document.getElementById('set_qntDistribuida').innerHTML = tamanhoDisponivelUsadoProd;
 
-
-		console.log('6 aqui estive');
 		document.getElementById('nome').innerHTML = document.getElementById('produto_nome').value;
 		document.getElementById('qtn').innerHTML = document.getElementById('produto_quantidade').value;
 		document.getElementById('preco').innerHTML = document.getElementById('produto_preco').value;
@@ -220,17 +233,14 @@ function validar_opcao(opt)
 		document.getElementById('cor1').innerHTML = '<div class="line" style="background-color:'+Produto['cor1']+'">&#8203;</div>';
 		document.getElementById('cor2').innerHTML = '<div class="line" style="background-color:'+Produto['cor2']+'">&#8203;</div>';	
 		preview_images('img_img2');
+
+		Produto['categoria'] = categoriaParaInteiro(Produto['categoria']);
 		send_data();	
 
 	}
 	else if(opt == '8')
 	{
-
-
-	}
-	else if(opt == '9')
-	{
-		
+		//sem ação
 	}
 	
 	if(ElementoEmErro !== undefined){
@@ -365,6 +375,10 @@ function send_data()
 		success:function(a,b,c){
 			$('.send').show('slow');
 			send_images(a);
+			setTimeout(function(){
+				$('#urlproduto').show();
+				$('#urlproduto').attr('href','/Produtos/?ProdutoID='+a);				
+			},2000);
 		}
 	});
 }
@@ -381,13 +395,13 @@ function send_images(a){
 
 
 	$.ajax({
-		url:'../../../../Files/server/Request/admin.php?ModifyProduct&Replaceimages=all&productId=9932923',
+		url:'../../../../Files/server/Request/admin.php?ModifyProduct&Replaceimages=all&productId='+a,
 		data:file,
 		type:'POST',
 		contentType:false,
 		processData:false,
 		cache:false,
-		success:function(){
+		success:function(t){
 			$('.send_image').show('slow');
 			$('#message').html('Imagens enviadas com sucesso');
 			$('#message').show('slow');
@@ -407,4 +421,9 @@ function send_images(a){
 		}
 	});
 
+}
+function categoriaParaInteiro(valor)
+{
+	let cat = ['masculino','masculino_infantil','feminino','feminino_infantil','pets','outra'];
+	return cat.indexOf(valor);
 }

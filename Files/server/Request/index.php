@@ -28,7 +28,6 @@
 			}
 			catch(Exception $e)
 			{
-				echo "why";
 				echo $e.getMessage();
 				$a = array($a,"error" => $e.getMessage());
 			}

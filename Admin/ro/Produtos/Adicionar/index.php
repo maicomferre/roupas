@@ -196,6 +196,12 @@
 						</div>
 					</div>
 				</div>
+				<div class="display" id="opt_9" style="display:none;">
+					<div class="container">
+						<button class="button" onClick="view('reset');">Adicionar Outro Produto</button>
+						<button class="button"><a href="../">Voltar a Pagina de Administração</a></button>
+					</div>
+				</div>	
 				<br  /><br />
 				<div class="botoes">
 					<!--<button class="bottao" onClick="view('back');" style="display:none;" id="btn1_d" >Voltar</button>-->
@@ -205,6 +211,7 @@
 
 				<div class="send">
 					<button class="btn btn-primary" style="display:none;" id="message"></button>
+					<a href="" id="urlproduto" style="display:none;">Ver Produto</a>
 					<div class="send_image">
 						<div style="display:none" id="send_images_fail">
 							<button class="btn Danger" style="display:none;" id="error_1"></button> 

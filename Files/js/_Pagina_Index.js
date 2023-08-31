@@ -21,7 +21,7 @@ function CriarRoupa(retorno)
 	ROUPA[ROUPA_Indice]['Categoria'] = retorno['Categoria'];
 	ROUPA[ROUPA_Indice]['Centralizacao_X'] = retorno['CT_X'];
 	ROUPA[ROUPA_Indice]['Centralizacao_Y'] = retorno['CT_Y'];
-	ROUPA[ROUPA_Indice]['Descricao'] =  retorno['Descricao'];
+	ROUPA[ROUPA_Indice]['Descricao'] = retorno['Descricao'];
 	ROUPA[ROUPA_Indice]['Imagem_Indice'] = 0;
 
 	var HTML = '';

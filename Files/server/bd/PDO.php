@@ -10,7 +10,7 @@
 if(defined('dev')){
 	$pdo->exec('CREATE DATABASE '.db);
 
-	$sql = 'CREATE TABLE `'.db.'`.`produto` ( `nome` VARCHAR(50) NOT NULL ,
+	$sql = 'CREATE TABLE `loja_roupas`.`produto` ( `nome` VARCHAR(50) NOT NULL ,
 	 `preco` DOUBLE NOT NULL ,
 	  `data_criacao` DATE NOT NULL ,
 	   `visto` INT NOT NULL , `compras` INT NOT NULL ,
