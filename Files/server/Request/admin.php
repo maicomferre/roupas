@@ -1,5 +1,6 @@
 <?php require_once('../bd/PDO.php'); ?>
 <?php
+
 if(isset($_GET['AddProduct'])){
 
 
