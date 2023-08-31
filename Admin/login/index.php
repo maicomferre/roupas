@@ -9,7 +9,7 @@
 	<body>
 		<div class="fundo"></div>
 		<div class="fundo_input">
-			<form action="../../Files/server/request/contas/Logar.php" method="post">
+			<form action="/Files/server/request/contas/Logar.php" method="post">
 				<input type="text" id="login" required name="login" placeholder="Login" /><br />
 				<input type="password" id="pass" required name="pass" placeholder="Senha" /><br />
 				<input type="submit" value="Entrar" />

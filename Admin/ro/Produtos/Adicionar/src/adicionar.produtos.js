@@ -368,7 +368,7 @@ function tamn_quant_check()
 function send_data()
 {
 	$.ajax({
-		url:'../../../../Files/server/Request/admin.php?AddProduct',
+		url:'/Files/server/Request/admin.php?AddProduct',
 		data:{data:JSON.stringify(Produto)},
 		method:'POST',
 		dataType:'json',
@@ -395,7 +395,7 @@ function send_images(a){
 
 
 	$.ajax({
-		url:'../../../../Files/server/Request/admin.php?ModifyProduct&Replaceimages=all&productId='+a,
+		url:'/Files/server/Request/admin.php?ModifyProduct&Replaceimages=all&productId='+a,
 		data:file,
 		type:'POST',
 		contentType:false,

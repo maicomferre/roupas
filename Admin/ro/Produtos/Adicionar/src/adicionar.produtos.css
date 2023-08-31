@@ -7,11 +7,10 @@
 	width:calc(100% - 20px);
 	border:1px solid #EEE;
 	vertical-align:middle;
-
 }
 
 .bottao{
-	font-family:Arial;/* fantasy,Comic Sans, Comic Sans MS, cursive;*/
+	font-family:'Comic Sans', 'Comic Sans MS';
 	position:relative;
 	padding:15px;
 	background-color:#4A4AFF;

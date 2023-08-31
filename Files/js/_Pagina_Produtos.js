@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$.ajax({
-		url:'../Files/server/Request/',
+		url:'/Files/server/Request/',
 		method:'POST',
 		data:{
 			'produtoID':pro_id,
@@ -26,13 +26,13 @@ function ConstruirProduto(Dados){
 	var IMGS = Dados['num_imagens'];
 	
 	for(var i=0; i<IMGS; i++)
-		OutrasImg = OutrasImg + '<img src="../Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
+		OutrasImg = OutrasImg + '<img src="/Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
 	
 	txt = '<p id="Titulo_Produto">' + Dados['nome'] + '</p><div class="objeto">';
 	
 	txt +=	'<div class="OutrasImg">'+OutrasImg+'</div>';
 	
-	txt +=	'<img src="../Produtos/img/'+Dados.imagens[0]+'" id="ImgCentrProduto" />';
+	txt +=	'<img src="/Produtos/img/'+Dados.imagens[0]+'" id="ImgCentrProduto" />';
 	
 	txt +=	'</div><div class="objeto">';
 	

@@ -3,10 +3,10 @@
 	<head>
 		<title>Roupas Online - Pagina Inicial</title>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="../../../../Files/css/Global.css" charset="utf-8" media="screen and (min-width:429px)" />		
-		<!--<link rel="stylesheet" type="text/css" href="../../../../Files/css/PaginaIndex_Width-429px-width_.css" media="screen and (max-width: 429px)" />-->
+		<link rel="stylesheet" type="text/css" href="/Files/css/Global.css" charset="utf-8" media="screen and (min-width:429px)" />		
+		<!--<link rel="stylesheet" type="text/css" href="/Files/css/PaginaIndex_Width-429px-width_.css" media="screen and (max-width: 429px)" />-->
 		<link rel="stylesheet" type="text/css" href="src/adicionar.produtos.css" />
-		<script type="text/javascript" src="../../../../jquery-3.1.0.min.js" language="javascript"></script>
+		<script type="text/javascript" src="/jquery-3.1.0.min.js" language="javascript"></script>
 		<script type="text/javascript" src="src/adicionar.produtos.js" language="javascript"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -19,12 +19,12 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>		
 				
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
 		<div class="Titulo">
-			<img id="image0" src="../../../../Files/img/Camisa0.gif" />
-			<img id="image1" src="../../../../Files/img/Camisa1.gif" />
+			<img id="image0" src="/Files/img/Camisa0.gif" />
+			<img id="image1" src="/Files/img/Camisa1.gif" />
 			<p id="Title">Venda de Roupas Online - Pagina Inicial</p>
 			<p id="SubTitle">Administração -  Opção: Adicionar produtos</p>
 			<p id="credits">Desenvolvido por: Maicom Ferreira</p>
@@ -199,7 +199,7 @@
 				<div class="display" id="opt_9" style="display:none;">
 					<div class="container">
 						<button class="button" onClick="view('reset');">Adicionar Outro Produto</button>
-						<button class="button"><a href="../">Voltar a Pagina de Administração</a></button>
+						<button class="button"><a href="/Admin">Voltar a Pagina de Administração</a></button>
 					</div>
 				</div>	
 				<br  /><br />

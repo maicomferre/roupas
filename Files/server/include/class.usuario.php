@@ -15,7 +15,7 @@ class Usuario
 		
 		if($time == -1){
 			if(!isset($_SESSION['limite']))
-				$_SESSION['limite'] = 10;
+				$_SESSION['limite'] = 100;
 		
 			session_cache_expire($time);
 			return $_SESSION['limite'];

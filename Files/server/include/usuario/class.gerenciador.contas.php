@@ -7,8 +7,8 @@ class GerenciadorContas
 	function __construct($db=null)
 	{
 		if(!isset($_SESSION) or session_status() !== PHP_SESSION_ACTIVE)
-			session_name(hash('sha256',base64_encode(random_bytes(8))));
 			session_start();
+			session_name(hash('sha256',base64_encode(random_bytes(8))));
 		
 		if($db !== null)
 			$conexaoBanco = $db;
@@ -23,8 +23,7 @@ class GerenciadorContas
 		
 		$p = explode('-',$passw);
 		
-		$passw = password_hash(hash('sha256',md5($salt1 + $p[1]) + hash('sha512',$p[0]+ $salt4) ,PASSWORD_DEFAULT ));		
-	
+		$passw = password_hash(hash('sha256',md5($salt1 + $p[1]) + hash('sha512',$p[0]+ $salt4) ,PASSWORD_DEFAULT ));
 	}
 
 	function setLogin($user,$password)
@@ -61,10 +60,8 @@ class GerenciadorContas
 			$this->ToPass();
 			
 			#if($passw === 
-		}
-		
+		}	
 	}
-	
 }
 
 ?>
