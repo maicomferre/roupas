@@ -1,12 +1,11 @@
 <?php
 	define('HOST','localhost');
-	define('USER','root');
-	define('password','');
+	define('USER','user');
+	define('password','123');
 	define('db','loja_roupas');
 	#define('dev',true);
 
 	$pdo = new PDO('mysql:host='.HOST.';port=3306;charset=utf8',USER,password);
-
 
 if(defined('dev')){
 	$pdo->exec('CREATE DATABASE '.db);

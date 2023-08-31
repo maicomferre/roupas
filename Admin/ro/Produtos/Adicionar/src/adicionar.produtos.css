@@ -11,7 +11,7 @@
 }
 
 .bottao{
-	font-family: fantasy,Comic Sans, Comic Sans MS, cursive;
+	font-family:Arial;/* fantasy,Comic Sans, Comic Sans MS, cursive;*/
 	position:relative;
 	padding:15px;
 	background-color:#4A4AFF;

@@ -1,6 +1,9 @@
 <?php require_once('../bd/PDO.php'); ?>
 <?php require_once('../include/class.usuario.php'); ?>
 <?php
+
+
+
 	$user = new Usuario();
 	
 	if($user->Logado() === false){
@@ -8,6 +11,7 @@
 		//exit();
 	}
 	
+
 	if(isset($_GET['Roupas']))
 	{
 		if($_GET['Roupas'] == 'all')
@@ -15,17 +19,17 @@
 			header("Content-Type: application/json; charset=utf-8");
 			
 			$a = array();
-
 			try{
 				$result = $pdo->prepare('SELECT * FROM `produto`');
 			
 				$result->execute();
 		
 				$a = $result->fetchAll();
-
 			}
 			catch(Exception $e)
 			{
+				echo "why";
+				echo $e.getMessage();
 				$a = array($a,"error" => $e.getMessage());
 			}
 
@@ -66,7 +70,8 @@
 	}	
 	else
 	{
-		http_response_code(400);
+		echo "erro1";
+		#http_response_code(400);
 		exit;
 	}
 ?>

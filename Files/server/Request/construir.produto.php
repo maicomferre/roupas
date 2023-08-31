@@ -8,6 +8,7 @@
 */
 	if((!isset($_POST['categoria']) || empty($_POST['categoria'])) && (!isset($_POST['ProdutoID']) || empty($_POST['ProdutoID'])))
 	{
+		echo "Requisição inválida";
 		http_response_code(400);
 		exit();
 	}

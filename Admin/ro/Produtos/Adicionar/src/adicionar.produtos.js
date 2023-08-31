@@ -84,23 +84,23 @@ function validar_opcao(opt)
 	}
 	else if(opt == '2')
 	{
-		var quant = document.getElementById('produto_preco');
+		var quante = document.getElementById('produto_preco');
 		
-		if(quant === undefined || quant === null){
+		if(quante === undefined || quante === null){
 			alert('Algo de errado não deu certo! Parece que sua pagina não foi carregada corretamente ou você está fazendo algo que não devia!');
 			return false;			
 		}
 		
-		quant = quant.value.replace(',','.');
+		quant = quante.value.replace(',','.');
 		var preco = parseFloat(quant);
 		
 		if(isNaN(preco)){
-			quant.focus();
+			quante.focus();
 			MessageEx('#produto_preco',"Quantidade: Verifique se o valor digitado é um número");
 			return false;				
 		}
 		else if(preco < 0){
-			quant.focus();
+			quante.focus();
 			MessageEx('#produto_preco',"Preço: Verifique o preço do produto. Deve ser maior ou igual a 0(gratis)");
 			return false;			
 		}
