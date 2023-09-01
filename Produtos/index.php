@@ -34,18 +34,22 @@
 		<br />
 		<div class="Conteudo">
 			
-			<p id="Titulo_Produto"></p><div class="objeto">
+			<p id="Titulo_Produto"></p>
+			<div class="objeto">
 	
-			<div class="OutrasImg"></div>
+				<div class="OutrasImg"></div>
 	
-			<img src="" id="ImgCentrProduto" />
+				<img src="" id="ImgCentrProduto" />
 	
-			</div><div class="objeto">
+			</div>
+			<div class="objeto">
 	
-				<p id="Valor">R$: <span id="preco"></span> <span id="descontovalorantigo"><sub><del>R$: '+ (Dados['ValorDesconto']) +'<del> </sub></span></p>
+				<p id="Valor">R$: 
+					<span id="preco"></span> 
+					<span id="descontovalorantigo"></span>
+				</p>
 	
 			<p id="TextCor">Selecione a Cor</p>
-	
 	
 			<fieldset>
 				
@@ -56,10 +60,7 @@
 					<span onClick="descricao.maisMenos();" id="MaisDetalhes"> &nbsp; Mais Detalhes</span></p>
 				-->
 				<br><br><br>
-				<select id="Cores" title="Selecionar cor">
-					<option value="-1" selected disabled>Selecione a cor</option>
-					<option value="VERDE">Azul</option>
-				</select>
+				<select id="Cores" title="Selecionar cor"></select>
 	
 				<br><br><br>
 				<div class="SelecionarTamanho">

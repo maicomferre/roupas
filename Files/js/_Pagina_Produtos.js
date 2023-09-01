@@ -17,7 +17,6 @@ function ConstruirProduto(Dados){
 	if(Dados['ValorDesconto'] != undefined)
 	{
 		Valor = Dados['ValorDesconto'];
-
 	}else{
 		Valor = Dados['preco'];
 	}
@@ -25,18 +24,23 @@ function ConstruirProduto(Dados){
 	var OutrasImg = '';
 	var IMGS = Dados['num_imagens'];
 	
-	//for(var i=0; i<IMGS; i++)
-	//	OutrasImg = OutrasImg + '<img src="/Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
+	for(var i=0; i<IMGS; i++)
+		OutrasImg = OutrasImg + '<img src="/Produtos/img/'+Dados.imagens[i]+'" onClick="AlterarImagemPara(this);" /><br />';
 
-	//$('.Conteudo').html(txt);
+	$('.OutrasImg').html(OutrasImg);
 	$('#preco').html(parseFloat(Dados['preco']).toFixed(2));
 	$('#descricao').html(Dados['Descricao']);
 	$('#Titulo_Produto').html(Dados['nome']);
 	$('#ImgCentrProduto').attr('src','/Produtos/img/'+Dados['imagens'][0]);
 
+	$('#Cores').html('<option value="-1" selected>Selecione a cor</option>');
 
 	if(Dados['ValorDesconto'] == undefined)
 			$('#descontovalorantigo').hide();
+	else{
+		$('#descontovalorantigo').html('$<sub><del>'+Dados['ValorDesconto']+'<del></sub>');
+		$('#descontovalorantigo').show();
+	}
 	
 	
 }
