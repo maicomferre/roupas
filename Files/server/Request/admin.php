@@ -82,7 +82,7 @@ if(isset($_GET['ModifyProduct'])){
 	//usar classe
 
 	$con = new Banco();
-	$con->atualiza_imagem_anuncio($_GET['productId'],$imagens);
+	$con->substitui_imagens_anuncio($_GET['productId'],$imagens);
 
 	exit;
 }
