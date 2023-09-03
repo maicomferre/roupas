@@ -13,6 +13,7 @@ class Banco{
 
 	public $banco;
 	public $tabela_produtos = 'produto';
+	public $tabela_usuario = 'usuario';
 	public $cache;
 	public $chaves = array(
 		'nome','preco','preco_antigo',
@@ -26,21 +27,20 @@ class Banco{
 	);
 
 
-
-
 	function __construct(){
 		global $pdo;
 		$this->banco = $pdo;
 
 		$this->cache = array(
 			'anuncioid' => array(),
+			'usuarioid' => array(),
 		);
 	}
 
 	function mudar_imagens_anuncio($anuncioid,$imagens):bool
 	{
 		if($this->anuncio_existe($anuncioid) === false){
-			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
+			echo "[class=Banco][mudar_imagens_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
 			return false;
 		}
 
@@ -66,12 +66,12 @@ class Banco{
 	function atualizar_especifico_anuncio($anuncioid,$chave,$dados)
 	{
 		if($this->anuncio_existe($anuncioid) === false){
-			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
+			echo "[class=Banco][atualizar_especifico_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
 			return false;
 		}
 
 		if(in_array($chave, $this->chaves) === false){
-			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: $chave chave não econtrada no dicionário";			
+			echo "[class=Banco][atualizar_especifico_anuncio(..,..)]: $chave chave não econtrada no dicionário";
 			return false;
 		}
 
@@ -86,7 +86,7 @@ class Banco{
 	function substitui_imagens_anuncio($anuncioid,$strimagens):bool
 	{
 		if($this->banco->anuncio_existe($anuncioid) === false){
-			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
+			echo "[class=Banco][substitui_imagens_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
 			return false;
 		}
 		
@@ -94,7 +94,6 @@ class Banco{
 			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: $strimagens não é uma string";
 			return false;
 		}
-
 
 		$smt = $this->prepare('UPDATE `produto` SET `imagens`=:img where `produto_id`=:id');
 
@@ -107,7 +106,7 @@ class Banco{
 	function dado_especifico_anuncio($anuncioid,$dado):array
 	{
 		if($this->anuncio_existe($anuncioid) === false){
-			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
+			echo "[class=Banco][dado_especifico_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
 			return false;
 		}
 
@@ -118,7 +117,6 @@ class Banco{
 		$s->execute();
 
 		return $s->fetchAll();
-
 	}
 
 	function anuncio_existe($anuncioid):bool
@@ -141,9 +139,61 @@ class Banco{
 		
 		return false;
 	}
+
+	function cria_anuncio($produto_id,$criador_id):bool
+	{
+		/*if($this->anuncio_existe($produto_id) === true){
+			echo "[class=Banco][cria_anuncio(...,...)]: anuncio já existe";
+			return false;
+		}
+		if($this->usuario_existe($criador_id) === false){
+			echo "[class=banco][cria_anuncio(...,...): usuário criador do anuncio inexistente";
+			return false;
+		}*/
+
+		$t = $this->banco->prepare("INSERT INTO `produto`(`produto_id`,`criador_id`) VALUES(:prodid, :userid)");
+
+		$t->bindParam(":prodid",$produto_id);
+		$t->bindParam(":userid",$criador_id);
+
+		$t->execute();
+
+		return false;
+	}
+
+
+	///usuário 
+	function usuario_existe(string $usuarioid):bool
+	{
+		if(in_array($usuarioid, $this->cache['usuarioid']))
+			return true;
+
+		$s = $this->banco->prepare("SELECT `usuario_id` FROM `{$this->tabela_usuario}` WHERE `usuario_id`=:id");
+
+		$s->bindParam('id',$usuarioid);
+
+		$s->execute();
+
+		$r = $s->fetchAll();
+
+		if(count($r) > 0){
+			$this->cache['usuarioid'][] = $usuarioid;
+			return true;
+		}
+		
+		return false;		
+	}
 }
-/*
+
 $a = new Banco();
+
+$array = array();
+
+
+$a->cria_anuncio('123123','123124');
+
+
+/*
 //print_r($a->dado_especifico_anuncio('7593026','imagens'));
 
 
@@ -153,9 +203,8 @@ $a = new Banco();
  	'wewq.jpg'=>'joshua.jpg',
  ));
 
+
 */
-
-
 
 
 
@@ -164,33 +213,30 @@ $a = new Banco();
 if(defined('dev')){
 	$pdo->exec('CREATE DATABASE '.db);
 
-	$sql = 'CREATE TABLE `loja_roupas`.`produto` ( `nome` VARCHAR(50) NOT NULL ,
-	 `preco` DOUBLE NOT NULL ,
-	 `preco_antigo` DOUBLE NOT NULL,
-	  `data_criacao` DATE NOT NULL ,
-	   `visto` INT NOT NULL , 
-	   `compras` INT NOT NULL ,
-	    `avaliacao` FLOAT NOT NULL ,
-	     
-	     `hadesconto` BOOLEAN NOT NULL,
-	     `descontovalidade` DATE NOT NULL,
-	     `tipodesconto` INT NOT NULL,
-	     `calculodesconto` INT NOT NULL,
-	     `valordesconto` DOUBLE NOT NULL,
-
-	     `descontotitulo` DOUBLE NOT NULL ,
-	      `cupomtitulo` VARCHAR(100) NOT NULL ,
-
-	      `cores` VARCHAR(32) NOT NULL,
-	       `criador_id` INT NOT NULL ,
-	        `descricao` VARCHAR(500) NOT NULL ,
-	         `produto_id` VARCHAR(8) NOT NULL ,
-	          `categoria` INT NOT NULL ,
-	           `genero` VARCHAR(25) NOT NULL ,
-	            `imagens` VARCHAR(500) NOT NULL ,
-	             `anuncio` BOOLEAN NOT NULL ,
-	             `tamanhos` VARCHAR(20) NOT NULL,
-	             `desativado` BOOLEAN NOT NULL ) ENGINE = InnoDB;';
+	$sql = 'CREATE TABLE `loja_roupas`.`produto` ( `nome` VARCHAR(50) NULL ,
+	 `preco` DECIMAL NULL DEFAULT 0,
+	 `preco_antigo` DOUBLE NULL,
+	  `data_criacao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	   `visto` INT NULL DEFAULT 0, 
+	   `compras` INT NULL DEFAULT 0,
+	    `avaliacao` double NULL DEFAULT 0,
+	     `hadesconto` BOOLEAN NULL DEFAULT 0,
+	     `descontovalidade` DATE NULL,
+	     `tipodesconto` INT NULL DEFAULT 0,
+	     `calculodesconto` INT NULL DEFAULT 0,
+	     `valordesconto` DOUBLE NULL DEFAULT 0,
+	     `descontotitulo` DOUBLE NULL DEFAULT 0,
+	      `cupomtitulo` VARCHAR(100) NULL ,
+	      `cores` VARCHAR(32) NULL,
+	       `criador_id` INT NOT NULL,
+	        `descricao` VARCHAR(500) NULL,
+	         `produto_id` VARCHAR(8) NOT NULL,
+	          `categoria` INT NULL DEFAULT -1,
+	           `genero` VARCHAR(25) NULL,
+	            `imagens` VARCHAR(500) NULL,
+	             `anuncio` BOOLEAN NULL DEFAULT 0,
+	             `tamanhos` VARCHAR(20) NULL,
+	             `desativado` BOOLEAN NULL DEFAULT 1 ) ENGINE = InnoDB;';
 	
 	$pdo->exec($sql);
 
