@@ -119,7 +119,7 @@ class Banco{
 		return $s->fetchAll();
 	}
 
-	function anuncio_existe($anuncioid):bool
+	function anuncio_existe(string $anuncioid):bool
 	{
 		if(in_array($anuncioid, $this->cache['anuncioid']))
 			return true;
@@ -140,16 +140,16 @@ class Banco{
 		return false;
 	}
 
-	function cria_anuncio($produto_id,$criador_id):bool
+	function cria_anuncio(string $produto_id,string $criador_id):bool
 	{
-		/*if($this->anuncio_existe($produto_id) === true){
+		if($this->anuncio_existe($produto_id) === true){
 			echo "[class=Banco][cria_anuncio(...,...)]: anuncio já existe";
 			return false;
 		}
 		if($this->usuario_existe($criador_id) === false){
 			echo "[class=banco][cria_anuncio(...,...): usuário criador do anuncio inexistente";
 			return false;
-		}*/
+		}
 
 		$t = $this->banco->prepare("INSERT INTO `produto`(`produto_id`,`criador_id`) VALUES(:prodid, :userid)");
 
@@ -161,6 +161,18 @@ class Banco{
 		return false;
 	}
 
+	function query(string $sql, array $dados=array())
+	{
+		$a = $this->banco->prepare($sql);
+		
+		foreach($dados as $indice => $dado)
+		{
+			$a->bindParam($indice,$dado);
+		}
+		$a->execute();
+
+		return $a->fetchAll();
+	}
 
 	///usuário 
 	function usuario_existe(string $usuarioid):bool
@@ -170,7 +182,7 @@ class Banco{
 
 		$s = $this->banco->prepare("SELECT `usuario_id` FROM `{$this->tabela_usuario}` WHERE `usuario_id`=:id");
 
-		$s->bindParam('id',$usuarioid);
+		$s->bindValue('id',$usuarioid);
 
 		$s->execute();
 
@@ -181,34 +193,69 @@ class Banco{
 			return true;
 		}
 		
-		return false;		
+		return false;
+	}
+	function criar_usuario(string $nome,string $email,string $senha):bool
+	{
+		if(strlen($nome) < 10)
+		{
+			echo "[class=Banco][criar_usuario(..,..,..)]: Nome muito curto. Minimo: 10 caracteres";
+			return false;
+		}
+
+		if(filter_var($email, FILTER_VALIDATE_EMAIL) === false)
+		{
+			echo "[class=Banco][criar_usuario(..,..,..)]: Sintaxe email inválida";
+			return false;
+		}
+
+		$r = $this->query("SELECT * FROM `{$this->tabela_usuario}` WHERE email = :email",array(":email"=>$email));
+
+		if(count($r) > 0)
+		{
+			echo "[class=Banco][criar_usuario(..,..,..)]: Este e-mail já está cadastrado";
+			return false;
+		}
+
+		$senha = hash('sha512', $senha);
+
+		$a = $this->banco->prepare("INSERT INTO `{$this->tabela_usuario}`(`nome`,`senha`,`email`) VALUES(:nome,:senha,:email)");
+
+		$a->bindParam(":nome",$nome);
+		$a->bindParam(":senha",$senha);
+		$a->bindParam(":email",$email);
+
+		$a->execute();
+
+		return true;
+	}
+	function deletar_usuario(string $userid):bool
+	{
+		if($this->usuario_existe($userid) === false)
+		{
+			echo "[class=Banco][usuario_existe(..,..,..)]: Usuário não existe";
+			return false;
+		}
+
+		$this->query("TRUNCATE TABLE `{$this->tabela_usuario}` WHERE `usuario_id`=:id",array(":id"=>$userid));
+		return true;
 	}
 }
 
 $a = new Banco();
 
-$array = array();
-
-
-$a->cria_anuncio('123123','123124');
-
-
 /*
-//print_r($a->dado_especifico_anuncio('7593026','imagens'));
+$email = 'a@.com';
 
+$result = $a->query("SELECT * FROM `{$a->tabela_usuario}` WHERE email='a@.com'");#'email'=:email",array(':email'=>$email));
 
+if(count($result) > 0)
+{
+	echo "[class=Banco][criar_usuario(..,..,..)]: Este e-mail já está cadastrado";
+	return false;
+}*/
 
- $a->mudar_imagens_anuncio('7593026',array(
- 	'asd.jpg'=>'maicom.jpg',
- 	'wewq.jpg'=>'joshua.jpg',
- ));
-
-
-*/
-
-
-
-
+$a->criar_usuario('maicom ferreira ','maic@d.com',"1023");
 
 if(defined('dev')){
 	$pdo->exec('CREATE DATABASE '.db);
@@ -238,69 +285,27 @@ if(defined('dev')){
 	             `tamanhos` VARCHAR(20) NULL,
 	             `desativado` BOOLEAN NULL DEFAULT 1 ) ENGINE = InnoDB;';
 	
-	$pdo->exec($sql);
+	//$pdo->exec($sql);
 
-/*
-	//exemplo
-	$sql =$pdo->prepare("INSERT INTO `produto` (
-	 `nome`,
-	 `preco`,
-	 `preco_antigo`,
-	  `data_criacao`,
-	   `visto`, 
-	   `compras`,
-	    `avaliacao`,
-	     
-	     `hadesconto`,
-	     `descontovalidade`,
-	     `tipodesconto`,
-	     `calculodesconto`,
-	     `valordesconto`,
+	$sql = 'CREATE TABLE `loja_roupas`.`usuario`(
+			`nome` VARCHAR(250) NOT NULL,
+			`email` VARCHAR(150) NOT NULL,
+			`senha` VARCHAR(128) NOT NULL,
+			`data_criacao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			`comprasid` LONGTEXT NULL DEFAULT NULL,
+			`produtos_vistos` VARCHAR(500) NULL DEFAULT NULL,
+			`preferencias` VARCHAR(50) NULL DEFAULT NULL,
+			`genero` SMALLINT DEFAULT 0,
+			`ultimoacesso` DATE NULL DEFAULT NULL,
+			`dadoshardware` VARCHAR(500) NULL DEFAULT NULL,
+			`carrinho` VARCHAR(1000) NULL DEFAULT NULL,
+			`emailvalidado` BOOL DEFAULT 0,
+			`cargo` SMALLINT DEFAULT 0,
+			`usuario_id` SMALLINT PRIMARY KEY AUTO_INCREMENT,
+			`avaliacoesid` LONGTEXT NULL) ENGINE = InnoDB;';
 
-	     `descontotitulo`,
-	      `cupomtitulo`,
 
-	      `cores`,
-	       `criador_id`,
-	        `descricao`,
-	         `produto_id`,
-	          `categoria`,
-	           `genero`,
-	            `imagens`,
-	             `anuncio`,
-	             `tamanhos`,
-	             `desativado`
-	    )  VALUES(
-	 'Casaco de teste para moda',
-	 182.93,
-	 321.14,
-	  NOW(),
-	   0, 
-	   0,
-	    0,
-	     
-	     false,
-	     NOW(),
-	     0,
-	     0,
-	     0,
-
-	     0,
-	      'black',
-
-	      '0xFFCCAA,0xFFFFFF',
-	       01,
-	        'Produto bem Produtado conhecido mundialmente por seus Produtamentos',
-	         '7593026',
-	          0,
-	           0,
-	            'asd.jpg,eer.jpg,efer.jpg,eerf.jpg,wewq.jpg',
-	             true,
-	             '0,1,3',
-	             false
-	    );
-*/
-	$sql->execute();
+	//$sql->execute();
 }
 else{
 	$pdo->exec('USE '.db);
