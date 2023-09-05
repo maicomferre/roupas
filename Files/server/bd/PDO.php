@@ -92,25 +92,67 @@ class Banco{
 		$smt->execute();
 	}
 
-	public function substitui_imagens_anuncio($anuncioid,$strimagens):bool
+	public function substitui_imagens_anuncio(string $anuncioid,string $imagens):bool
 	{
-		if($this->banco->anuncio_existe($anuncioid) === false){
+		if($this->anuncio_existe($anuncioid) === false){
 			echo "[class=Banco][substitui_imagens_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
 			return false;
 		}
 		
-		if(is_string($strimagens) === false){
-			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: $strimagens não é uma string";
+		if(is_string($imagens) === false){
+			echo "[class=Banco][atualiza_imagem_anuncio(..,..)]: $imagens não é uma string";
 			return false;
 		}
 
 		$smt = $this->prepare('UPDATE `produto` SET `imagens`=:img where `produto_id`=:id');
 
 		$smt->bindParam('id',$anuncioid);
-		$smt->bindParam('img',$strimagens);
+		$smt->bindParam('img',$imagens);
 
 		$smt->execute();
 	}
+	public function deleta_anuncio(string $anuncioid):bool
+	{
+		if($this->anuncio_existe($anuncioid) === false){
+			echo "[class=Banco][deleta_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
+			return false;
+		}
+
+		$this->query("DELETE FROM `{$this->tabela_produtos}` WHERE `produto_id`=:id",array(":id"=>$anuncioid));
+		return true;
+
+	}
+	public function listar_anuncios(array $filtros=array()):bool|array
+	{
+		if(count($filtros) == 0)
+		{
+			$a = $this->query("SELECT * FROM `{$this->tabela_produtos}`");
+			return $a;
+		}
+
+		$ftl = '';
+
+		foreach($filtros as $indice => $filtro)
+		{
+			$a = match($indice)
+			{
+				"vistodec" => "ORDER BY `visto` DESC LIMIT ".MAXIMO_LINHAS_RETORNO ,
+				"vistocre" =>  "ORDER BY `visto` ASC LIMIT ".MAXIMO_LINHAS_RETORNO,
+			};
+			$ftl = $a;
+		}
+
+		if(strlen($ftl) === 0)
+		{
+			echo "[class=Banco][listar_anuncios(array ...)]: Filtro não listado";
+			return false;
+		}
+
+		$r = $this->query("SELECT * FROM `{$this->tabela_produtos}` $ftl");
+
+		return $r;
+	}
+
 
 	public function dado_especifico_anuncio($anuncioid,$dado):array
 	{
@@ -185,6 +227,12 @@ class Banco{
 	}
 
 	///usuário 
+
+	public function listar_usuarios()
+	{
+		return $this->query("SELECT * FROM `{$this->tabela_usuario}`");
+	}
+
 	public function usuario_existe(string $usuarioid):bool
 	{
 		if(in_array($usuarioid, $this->cache['usuarioid']))
@@ -291,7 +339,9 @@ class Banco{
 
 $a = new Banco();
 
-print_r($a->obter_usuario("3"));
+echo "<pre>";
+print_r($a->listar_usuarios());
+echo "</pre>";
 
 
 ?>
