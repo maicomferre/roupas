@@ -1,21 +1,23 @@
 <?php require_once('../include/regras.php'); ?>
 <?php
+/*
+	Class que gerencia o banco de dados.
+	Apenas ela acessa o banco de dados
+*/
+
+
 	define('HOST','localhost');
 	define('USER','user');
 	define('password','123');
 	define('db','loja_roupas');
-	#define('dev',true);
-
-	$pdo = new PDO('mysql:host='.HOST.';port=3306;dbname='.db.';charset=utf8',USER,password);
-
 
 class Banco{
 
-	public $banco;
-	public $tabela_produtos = 'produto';
-	public $tabela_usuario = 'usuario';
-	public $cache;
-	public $chaves_produto = array(
+	private $banco;
+	private $tabela_produtos = 'produto';
+	private $tabela_usuario = 'usuario';
+	private $cache;
+	private $chaves_produto = array(
 		'nome','preco','preco_antigo',
 		'data_criacao','visto', 'compras',
 		'avaliacao','hadesconto', 'descontovalidade',
@@ -26,15 +28,16 @@ class Banco{
 		'anuncio','tamanhos','desativado'
 	);
 
-	public $chaves_usuario = array(
+	private $chaves_usuario = array(
 		'nome','email','senha','data_criacao','comprasid',
 		'produtos_visto','preferencias','genero',
 		'ultimoacesso','dadoshardware','carrinho',
 		'emailvalidado','cargo','usuario_id','avaliacoesid'	
 	);
 
-	function __construct(){
-		global $pdo;
+	public function __construct(){
+		$pdo = new PDO('mysql:host='.HOST.';port=3306;dbname='.db.';charset=utf8',USER,password);
+
 		$this->banco = $pdo;
 
 		$this->cache = array(
@@ -43,7 +46,7 @@ class Banco{
 		);
 	}
 
-	function mudar_imagens_anuncio($anuncioid,$imagens):bool
+	public function mudar_imagens_anuncio($anuncioid,$imagens):bool
 	{
 		if($this->anuncio_existe($anuncioid) === false){
 			echo "[class=Banco][mudar_imagens_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
@@ -69,7 +72,7 @@ class Banco{
 		return true;
 	}
 
-	function atualizar_especifico_anuncio($anuncioid,$chave,$dados)
+	public function atualizar_especifico_anuncio($anuncioid,$chave,$dados)
 	{
 		if($this->anuncio_existe($anuncioid) === false){
 			echo "[class=Banco][atualizar_especifico_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
@@ -89,7 +92,7 @@ class Banco{
 		$smt->execute();
 	}
 
-	function substitui_imagens_anuncio($anuncioid,$strimagens):bool
+	public function substitui_imagens_anuncio($anuncioid,$strimagens):bool
 	{
 		if($this->banco->anuncio_existe($anuncioid) === false){
 			echo "[class=Banco][substitui_imagens_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
@@ -109,7 +112,7 @@ class Banco{
 		$smt->execute();
 	}
 
-	function dado_especifico_anuncio($anuncioid,$dado):array
+	public function dado_especifico_anuncio($anuncioid,$dado):array
 	{
 		if($this->anuncio_existe($anuncioid) === false){
 			echo "[class=Banco][dado_especifico_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
@@ -125,7 +128,7 @@ class Banco{
 		return $s->fetchAll();
 	}
 
-	function anuncio_existe(string $anuncioid):bool
+	public function anuncio_existe(string $anuncioid):bool
 	{
 		if(in_array($anuncioid, $this->cache['anuncioid']))
 			return true;
@@ -146,7 +149,7 @@ class Banco{
 		return false;
 	}
 
-	function cria_anuncio(string $produto_id,string $criador_id):bool
+	public function cria_anuncio(string $produto_id,string $criador_id):bool
 	{
 		if($this->anuncio_existe($produto_id) === true){
 			echo "[class=Banco][cria_anuncio(...,...)]: anuncio já existe";
@@ -167,7 +170,7 @@ class Banco{
 		return false;
 	}
 
-	function query(string $sql, array $dados=array())
+	private function query(string $sql, array $dados=array())
 	{
 		$a = $this->banco->prepare($sql);
 		
@@ -182,7 +185,7 @@ class Banco{
 	}
 
 	///usuário 
-	function usuario_existe(string $usuarioid):bool
+	public function usuario_existe(string $usuarioid):bool
 	{
 		if(in_array($usuarioid, $this->cache['usuarioid']))
 			return true;
@@ -202,7 +205,7 @@ class Banco{
 		
 		return false;
 	}
-	function criar_usuario(string $nome,string $email,string $senha):bool
+	public function criar_usuario(string $nome,string $email,string $senha):bool
 	{
 		if(strlen($nome) < 10)
 		{
@@ -236,7 +239,21 @@ class Banco{
 
 		return true;
 	}
-	function altera_usuario(string $userid,string $key,string $dado):bool
+
+	public function obter_usuario($userid):bool|array
+	{
+		if($this->usuario_existe($userid) === false)
+		{
+			echo "[class=Banco][obter_usuario(..)]: Usuário não existe";
+			return false;
+		}
+
+		$a = $this->query("SELECT * FROM `usuario` WHERE `usuario_id`=:id",array(':id'=>$userid));
+
+		return $a;
+	}
+
+	public function altera_usuario(string $userid,string $key,string $dado):bool
 	{
 		if($this->usuario_existe($userid) === false)
 		{
@@ -259,7 +276,7 @@ class Banco{
 
 		return true;
 	}
-	function deletar_usuario(int $userid):bool
+	public function deletar_usuario(int $userid):bool
 	{
 		if($this->usuario_existe($userid) === false)
 		{
@@ -274,60 +291,7 @@ class Banco{
 
 $a = new Banco();
 
-
-print_r($a->query("SELECT * FROM `usuario`"));
-
-if(defined('dev')){
-	$pdo->exec('CREATE DATABASE '.db);
-
-	$sql = 'CREATE TABLE `loja_roupas`.`produto` ( `nome` VARCHAR(50) NULL ,
-	 `preco` DECIMAL NULL DEFAULT 0,
-	 `preco_antigo` DOUBLE NULL,
-	  `data_criacao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-	   `visto` INT NULL DEFAULT 0, 
-	   `compras` INT NULL DEFAULT 0,
-	    `avaliacao` double NULL DEFAULT 0,
-	     `hadesconto` BOOLEAN NULL DEFAULT 0,
-	     `descontovalidade` DATE NULL,
-	     `tipodesconto` INT NULL DEFAULT 0,
-	     `calculodesconto` INT NULL DEFAULT 0,
-	     `valordesconto` DOUBLE NULL DEFAULT 0,
-	     `descontotitulo` DOUBLE NULL DEFAULT 0,
-	      `cupomtitulo` VARCHAR(100) NULL ,
-	      `cores` VARCHAR(32) NULL,
-	       `criador_id` INT NOT NULL,
-	        `descricao` VARCHAR(500) NULL,
-	         `produto_id` VARCHAR(8) NOT NULL,
-	          `categoria` INT NULL DEFAULT -1,
-	           `genero` VARCHAR(25) NULL,
-	            `imagens` VARCHAR(500) NULL,
-	             `anuncio` BOOLEAN NULL DEFAULT 0,
-	             `tamanhos` VARCHAR(20) NULL,
-	             `desativado` BOOLEAN NULL DEFAULT 1 ) ENGINE = InnoDB;';
-	
-	//$pdo->exec($sql);
-
-	$sql = 'CREATE TABLE `loja_roupas`.`usuario`(
-			`nome` VARCHAR(250) NOT NULL,
-			`email` VARCHAR(150) NOT NULL,
-			`senha` VARCHAR(128) NOT NULL,
-			`data_criacao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-			`comprasid` LONGTEXT NULL DEFAULT NULL,
-			`produtos_vistos` VARCHAR(500) NULL DEFAULT NULL,
-			`preferencias` VARCHAR(50) NULL DEFAULT NULL,
-			`genero` SMALLINT DEFAULT 0,
-			`ultimoacesso` DATE NULL DEFAULT NULL,
-			`dadoshardware` VARCHAR(500) NULL DEFAULT NULL,
-			`carrinho` VARCHAR(1000) NULL DEFAULT NULL,
-			`emailvalidado` BOOL DEFAULT 0,
-			`cargo` SMALLINT DEFAULT 0,
-			`usuario_id` SMALLINT PRIMARY KEY AUTO_INCREMENT,
-			`avaliacoesid` LONGTEXT NULL) ENGINE = InnoDB;';
+print_r($a->obter_usuario("3"));
 
 
-	//$sql->execute();
-}
-else{
-	$pdo->exec('USE '.db);
-}
 ?>
