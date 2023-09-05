@@ -15,7 +15,7 @@ class Banco{
 	public $tabela_produtos = 'produto';
 	public $tabela_usuario = 'usuario';
 	public $cache;
-	public $chaves = array(
+	public $chaves_produto = array(
 		'nome','preco','preco_antigo',
 		'data_criacao','visto', 'compras',
 		'avaliacao','hadesconto', 'descontovalidade',
@@ -26,6 +26,12 @@ class Banco{
 		'anuncio','tamanhos','desativado'
 	);
 
+	public $chaves_usuario = array(
+		'nome','email','senha','data_criacao','comprasid',
+		'produtos_visto','preferencias','genero',
+		'ultimoacesso','dadoshardware','carrinho',
+		'emailvalidado','cargo','usuario_id','avaliacoesid'	
+	);
 
 	function __construct(){
 		global $pdo;
@@ -70,7 +76,7 @@ class Banco{
 			return false;
 		}
 
-		if(in_array($chave, $this->chaves) === false){
+		if(in_array($chave, $this->chaves_produto) === false){
 			echo "[class=Banco][atualizar_especifico_anuncio(..,..)]: $chave chave não econtrada no dicionário";
 			return false;
 		}
@@ -169,6 +175,7 @@ class Banco{
 		{
 			$a->bindParam($indice,$dado);
 		}
+
 		$a->execute();
 
 		return $a->fetchAll();
@@ -229,11 +236,34 @@ class Banco{
 
 		return true;
 	}
+	function altera_usuario(string $userid,string $key,string $dado):bool
+	{
+		if($this->usuario_existe($userid) === false)
+		{
+			echo "[class=Banco][altera_usuario(..)]: Usuário não existe";
+			return false;
+		}
+
+		if(in_array($key,$this->chaves_usuario) === false)
+		{
+			echo "[class=Banco][altera_usuario(..)]: chave não encontrada no dicionário de usuários";
+			return false;
+		}
+
+		$a = $this->banco->prepare("UPDATE `{$this->tabela_usuario}` SET `{$key}`=:dado WHERE `usuario_id`=:id");
+
+		$a->bindParam(":dado",$dado);
+		$a->bindParam(":id",$userid);
+
+		$a->execute();
+
+		return true;
+	}
 	function deletar_usuario(int $userid):bool
 	{
 		if($this->usuario_existe($userid) === false)
 		{
-			echo "[class=Banco][usuario_existe(..,..,..)]: Usuário não existe";
+			echo "[class=Banco][deletar_usuario(..)]: Usuário não existe";
 			return false;
 		}
 
@@ -243,6 +273,9 @@ class Banco{
 }
 
 $a = new Banco();
+
+
+print_r($a->query("SELECT * FROM `usuario`"));
 
 if(defined('dev')){
 	$pdo->exec('CREATE DATABASE '.db);
