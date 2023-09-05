@@ -3,10 +3,15 @@
 <?php
 
 
-
 	$user = new Usuario();
 	
-	if($user->Logado() === false){
+	$a = $user->Logar('maic@a.com','123');
+
+	echo "<hr><pre>";
+	var_dump($a);
+	echo "<hr></pre>";
+
+	if($a === false){
 		//echo "<h1>Acesso Negado!</h1>";
 		//exit();
 	}

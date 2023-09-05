@@ -233,25 +233,50 @@ class Banco{
 		return $this->query("SELECT * FROM `{$this->tabela_usuario}`");
 	}
 
-	public function usuario_existe(string $usuarioid):bool
+	public function usuario_existe(string $usuarioid,bool $verificaporemail=false)
 	{
-		if(in_array($usuarioid, $this->cache['usuarioid']))
-			return true;
+		$tipo = '';
+		if(!$verificaporemail)
+		{
+			if(in_array($usuarioid, $this->cache['usuarioid']))
+				return true;
 
-		$s = $this->banco->prepare("SELECT `usuario_id` FROM `{$this->tabela_usuario}` WHERE `usuario_id`=:id");
+			$tipo = "usuario_id";
+		}
+		else
+		{
+			if(filter_var($usuarioid,FILTER_VALIDATE_EMAIL) === false)
+			{
+				echo "[class=Banco][usuario_existe(..,..)]: Email Inválido";
+				return false;
+			}
+			$tipo = 'email';
+		}
+		$s = $this->banco->prepare("SELECT `usuario_id` FROM `{$this->tabela_usuario}` WHERE `{$tipo}`=:info");
 
-		$s->bindValue('id',$usuarioid);
+		$s->bindValue(':info',$usuarioid);
 
 		$s->execute();
 
 		$r = $s->fetchAll();
 
-		if(count($r) > 0){
-			$this->cache['usuarioid'][] = $usuarioid;
-			return true;
+		$c = count($r);
+		if($c == 0){
+			return false;
+		}else if($c > 1){
+			echo "[class=Banco][usuario_existe(..,..)]: Retorno SQL com mais de um usuário.";
+			return false;
 		}
-		
-		return false;
+
+		if(!$verificaporemail)
+			$this->cache['usuarioid'][] = $usuarioid;
+		else{
+			$r = $r[0]['usuario_id'];
+			$this->cache['usuarioid'][] = $r;
+			return $r;
+		}
+
+		return true;
 	}
 	public function criar_usuario(string $nome,string $email,string $senha):bool
 	{
@@ -300,6 +325,27 @@ class Banco{
 
 		return $a;
 	}
+	public function obter_especifico_usuario($userid,$chave):bool|array
+	{
+		if($this->usuario_existe($userid) === false)
+		{
+			echo "[class=Banco][obter_usuario(..)]: Usuário não existe";
+			return false;
+		}
+
+		if(in_array($chave,$this->chaves_usuario) === false)
+		{
+			echo "[class=Banco][altera_usuario(..)]: chave não encontrada no dicionário de usuários";
+			return false;
+		}
+
+		$a = $this->query("SELECT `{$chave}` FROM `{$this->tabela_usuario}` WHERE `usuario_id`=:id",
+			array("id" => $userid)
+		);
+
+
+		return $a;
+	}	
 
 	public function altera_usuario(string $userid,string $key,string $dado):bool
 	{
@@ -336,12 +382,5 @@ class Banco{
 		return true;
 	}
 }
-
-$a = new Banco();
-
-echo "<pre>";
-print_r($a->listar_usuarios());
-echo "</pre>";
-
 
 ?>
