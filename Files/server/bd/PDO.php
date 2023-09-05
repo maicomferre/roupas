@@ -229,7 +229,7 @@ class Banco{
 
 		return true;
 	}
-	function deletar_usuario(string $userid):bool
+	function deletar_usuario(int $userid):bool
 	{
 		if($this->usuario_existe($userid) === false)
 		{
@@ -237,25 +237,12 @@ class Banco{
 			return false;
 		}
 
-		$this->query("TRUNCATE TABLE `{$this->tabela_usuario}` WHERE `usuario_id`=:id",array(":id"=>$userid));
+		$this->query("DELETE FROM `{$this->tabela_usuario}` WHERE `usuario_id`=:id",array(":id"=>$userid));
 		return true;
 	}
 }
 
 $a = new Banco();
-
-/*
-$email = 'a@.com';
-
-$result = $a->query("SELECT * FROM `{$a->tabela_usuario}` WHERE email='a@.com'");#'email'=:email",array(':email'=>$email));
-
-if(count($result) > 0)
-{
-	echo "[class=Banco][criar_usuario(..,..,..)]: Este e-mail já está cadastrado";
-	return false;
-}*/
-
-$a->criar_usuario('maicom ferreira ','maic@d.com',"1023");
 
 if(defined('dev')){
 	$pdo->exec('CREATE DATABASE '.db);

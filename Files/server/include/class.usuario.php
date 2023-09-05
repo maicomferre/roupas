@@ -9,7 +9,7 @@ class Usuario
 			session_start();
 		}
 	}
-	
+		
 	function sessaoLimite($time=-1)
 	{
 		
