@@ -1,0 +1,11 @@
+<?php
+
+
+
+#bd
+define("MAXIMO_IMAGENS_POR_ANUNCIO",7);
+define("TAMANHO_ID_ANUNCIO_PADRAO",7);
+
+
+define("MAXIMO_LINHAS_RETORNO",200);
+?>
