@@ -24,7 +24,7 @@
 		<div class="Conteudo">
 			
 			<h1>Faça login para continuar</h1><hr />
-			<form action="/Files/server/request/accounts/login.php" method="post">
+			<form action="/Files/server/request/?logar" method="post">
 				
 		
 				<label for="email">Seu e-mail:</label><br />

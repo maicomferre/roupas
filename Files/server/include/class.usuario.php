@@ -2,6 +2,14 @@
 
 class Usuario
 {
+	private $cargos_str = array(
+		"visitante" 	=> "0",
+		"suporte" 		=> "1",
+		'anunciante' 	=> "2",
+		'admin'			=> "3",
+		'dev'			=> "4"
+	);
+
 
 	function __construct()
 	{
@@ -75,6 +83,7 @@ class Usuario
 		else
 		{
 			echo "senha erro";
+			return false;
 		}
 	}
 
@@ -140,6 +149,41 @@ class Usuario
 				'msg' => $msg
 			);
 	}
+
+	function requer($cargo)
+	{
+		if($this->Logado() === false)
+		{
+			if($cargo !== 'visitante')
+			{
+				$this->retorna_com_aviso("Acesso Não Autorizado!");
+				exit;
+			}
+			return true;
+		}
+
+		if(in_array($this->cargos_str,$cargo) === false)
+		{
+			$this->retorna_com_aviso("Erro interno. Cargo não encontrado");
+			exit;
+		}
+
+		if($this->Cargo() < $this->cargos_str)
+		{
+			$this->retorna_com_aviso("Acesso Não Autorizado!");
+			exit;
+		}
+		return true;
+	}
+
+
+	function retorna_com_aviso(string $mensagem,string $retorno='/')
+	{
+		$this->SetMensagem('aviso',$mensagem);
+		
+		header((($retorno === "/") ? ("/") : $retorno) );
+	}
+
 }
 
 ?>

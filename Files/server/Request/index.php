@@ -2,20 +2,35 @@
 <?php require_once('../include/class.usuario.php'); ?>
 <?php
 
-
 	$user = new Usuario();
-	
-	$a = $user->Logar('maic@a.com','123');
 
-	echo "<hr><pre>";
-	var_dump($a);
-	echo "<hr></pre>";
+	$status = $user->Logado();
 
-	if($a === false){
-		//echo "<h1>Acesso Negado!</h1>";
-		//exit();
+	if(isset($_GET['logar'])){
+		if($status === true){
+			$user->SetMensagem('aviso','Você já está logado!');
+			header('/');
+			exit;
+		}
+
+		if(isset($_POST['email']) && isset($_POST['pass']))
+		{
+			$logar = $user->Logar($_POST['email'],$_POST['pass']);
+
+			if($logar){
+				$user->SetMensagem('aviso','Login com sucesso! Bem Vindo(a), '.$_SESSION['nome']);
+				header('/');
+			}else{
+				$user->SetMensagem('aviso','E-mail ou senha incorreto!');
+				header('/Login');
+			}
+		}else{
+			echo "Erro logar. requisição inválida";
+			header('/');
+		}
+		exit;
 	}
-	
+
 
 	if(isset($_GET['Roupas']))
 	{

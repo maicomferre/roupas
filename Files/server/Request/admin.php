@@ -1,12 +1,22 @@
 <?php require_once('../bd/PDO.php'); ?>
+<?php require_once('../include/class.usuario.php'); ?>
 <?php
-/*
-	session_start();
-	//deve verificar permissões no futuro
-*/
+
+$user = new Usuario();
+
+$status = $user->Logado();
+$cargo = 0;
+
+if(!$status)
+{
+	$user->retorna_com_aviso('Não possui privilegios para acessar esta página!');
+	exit;
+}
+
 
 if(isset($_GET['AddProduct'])){
 
+	$user->requer('anunciante');
 
 	$data = array(
 		'nome'=>'',
@@ -67,7 +77,6 @@ if(isset($_GET['ModifyProduct'])){
 	}
 	
 	$imagens = '';
-	print_r($_FILES);
 	foreach($_FILES['file']['error'] as $key => $error){
 
 		$ext = '.jpg';
