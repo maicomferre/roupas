@@ -5,7 +5,6 @@
 	Apenas ela acessa o banco de dados
 */
 
-
 	define('HOST','localhost');
 	define('USER','user');
 	define('password','123');
@@ -381,6 +380,7 @@ class Banco{
 		$this->query("DELETE FROM `{$this->tabela_usuario}` WHERE `usuario_id`=:id",array(":id"=>$userid));
 		return true;
 	}
+
 }
 
 ?>
