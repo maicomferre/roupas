@@ -40,11 +40,8 @@
 			
 			$a = array();
 			try{
-				$result = $pdo->prepare('SELECT * FROM `produto`');
-			
-				$result->execute();
-		
-				$a = $result->fetchAll();
+				$db = new Banco();
+				$db->listar_anuncios();
 			}
 			catch(Exception $e)
 			{
