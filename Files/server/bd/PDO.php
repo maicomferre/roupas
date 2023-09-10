@@ -31,7 +31,7 @@ class Banco{
 		'nome','email','senha','data_criacao','comprasid',
 		'produtos_visto','preferencias','genero',
 		'ultimoacesso','dadoshardware','carrinho',
-		'emailvalidado','cargo','usuario_id','avaliacoesid'	
+		'emailvalidado','cargo','usuario_id','avaliacoesid'
 	);
 
 	public function __construct(){
@@ -158,6 +158,12 @@ class Banco{
 		if($this->anuncio_existe($anuncioid) === false){
 			echo "[class=Banco][dado_especifico_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
 			return false;
+		}
+
+		if(in_array($dado,$this->chaves_produto) === false)
+		{
+			echo "[class=Banco][dado_especifico_anuncio(..,..)]: \$dado $dado inválido";			
+			return false;			
 		}
 
 		$s = $this->banco->prepare("SELECT `{$dado}` FROM `produto` WHERE `produto_id`=:id");

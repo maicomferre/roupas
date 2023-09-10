@@ -41,7 +41,8 @@
 			$a = array();
 			try{
 				$db = new Banco();
-				$db->listar_anuncios();
+				$a = $db->listar_anuncios();
+				//$db->cria_anuncio('0','4');
 			}
 			catch(Exception $e)
 			{
@@ -56,19 +57,17 @@
 	}
 	else if(isset($_POST['produtoID']))
 	{
-		$ProdutoID = $_POST['produtoID'] ?? -1;
+		$b = new Banco();
 		
-		$result = $pdo -> prepare('SELECT * FROM `produto` WHERE produtoid=:pro_id');
-		$result->bindParam(":pro_id",$ProdutoID);
-		$result->execute();
+		$ProdutoID = $_POST['produtoID'];
 
-		$re = $result->fetch();
-
-		if(count($re) < 1)
+		if($b->anuncio_existe($ProdutoID) === false)
 		{
 			echo json_encode(array('indice'=>'0'));
-			exit();						
+			exit();
 		}
+		
+		$re = dado_especifico_anuncio($ProdutoID,"*");
 		
 		$img = explode(',',$re['imagens']);
 		
@@ -87,7 +86,7 @@
 	else
 	{
 		echo "erro1";
-		#http_response_code(400);
+		http_response_code(400);
 		exit;
 	}
 ?>
