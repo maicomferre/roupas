@@ -24,14 +24,14 @@ class Banco{
 		'descontotitulo', 'cupomtitulo', 'cores',
 		'criador_id','descricao','produto_id',
 		'categoria','genero','imagens',
-		'anuncio','tamanhos','desativado'
+		'anuncio','tamanhos','desativado',
 	);
 
 	private $chaves_usuario = array(
 		'nome','email','senha','data_criacao','comprasid',
 		'produtos_visto','preferencias','genero',
 		'ultimoacesso','dadoshardware','carrinho',
-		'emailvalidado','cargo','usuario_id','avaliacoesid'
+		'emailvalidado','cargo','usuario_id','avaliacoesid',
 	);
 
 	public function __construct(){
@@ -69,6 +69,40 @@ class Banco{
 
 		$this->atualizar_especifico_anuncio($anuncioid,'imagens',$esp);
 		return true;
+	}
+
+	function atualizar_todo_anuncio($anuncioid,$chaves)
+	{
+		if($this->anuncio_existe($anuncioid) === false){
+			echo "[class=Banco][atualizar_todo_anuncio(..,..)]: não encontrado anuncio $anuncioid";			
+			return false;
+		}
+		$indices = '';
+		foreach($chaves as $chave => $valor)
+		{
+			if(in_array($chave,$this->chaves_produto) === false or empty($valor))
+			{
+				unset($tmp[$chave]);
+				continue;
+			}
+			$tmp[$chave] = $valor;
+			$indices .= "`$chave`=:$chave,";
+		}
+
+		$tam = strlen($indices)-1;
+		if($indices[$tam] === ',')
+			$indices = substr($indices,0,$tam);
+
+		$sql = "UPDATE `produto` SET {$indices} WHERE `produto_id`=:id";
+
+		$tmp["id"] = $anuncioid;
+
+		echo "<pre>$sql<hr>";
+		print_r($tmp);
+		echo "</pre>";
+
+
+		$this->query($sql,$tmp);
 	}
 
 	public function atualizar_especifico_anuncio($anuncioid,$chave,$dados)
@@ -221,7 +255,10 @@ class Banco{
 	{
 		$a = $this->banco->prepare($sql);
 		
-		foreach($dados as $indice => $dado)
+
+		//Erro corrigido com auxilio de
+		//http://www.php.net/manual/fr/pdostatement.bindparam.php#98145
+		foreach($dados as $indice => &$dado)
 		{
 			$a->bindParam($indice,$dado);
 		}
@@ -388,5 +425,4 @@ class Banco{
 	}
 
 }
-
 ?>

@@ -19,6 +19,11 @@ class Usuario
 		}
 	}
 
+	function obterID()
+	{
+		return $_SESSION['usuario_id'];
+	}
+
 	function Logar(string $usuarioemail,string $senha)
 	{
 		if($this->Logado()){
@@ -78,6 +83,7 @@ class Usuario
 			$_SESSION['Logado'] = true;
 			$_SESSION['nome'] = $dados['nome'];
 			$this->Cargo($dados['cargo']);
+			$_SESSION['id'] = $dados['usuario_id'];
 			return true;
 		}
 		else

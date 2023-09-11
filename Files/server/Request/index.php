@@ -42,7 +42,6 @@
 			try{
 				$db = new Banco();
 				$a = $db->listar_anuncios();
-				//$db->cria_anuncio('0','4');
 			}
 			catch(Exception $e)
 			{
@@ -53,7 +52,7 @@
 			$a = array($a,'indice' => count($a));
 			
 			echo json_encode($a);
-		}	
+		}
 	}
 	else if(isset($_POST['produtoID']))
 	{
@@ -73,7 +72,6 @@
 		
 		unset($re['imagens']);
 		$re['imagens'] = [];
-		
 		
 		foreach($img as $i => $c){
 			$re['imagens'][$i] = $c;
