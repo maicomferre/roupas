@@ -83,7 +83,7 @@ class Usuario
 			$_SESSION['Logado'] = true;
 			$_SESSION['nome'] = $dados['nome'];
 			$this->Cargo($dados['cargo']);
-			$_SESSION['id'] = $dados['usuario_id'];
+			$_SESSION['usuario_id'] = $dados['usuario_id'];
 			return true;
 		}
 		else
@@ -174,8 +174,9 @@ class Usuario
 			exit;
 		}
 
-		if($this->Cargo() < $this->cargos_str)
+		if($this->Cargo() < $this->cargos_str[$cargo])
 		{
+			echo "a";
 			$this->retorna_com_aviso("Acesso Não Autorizado!");
 			exit;
 		}
@@ -187,7 +188,8 @@ class Usuario
 	{
 		$this->SetMensagem('aviso',$mensagem);
 		
-		header((($retorno === "/") ? ("/") : $retorno) );
+		if($retorno !== '-')
+			header((($retorno === "/") ? ("/") : $retorno) );
 	}
 
 }

@@ -1,8 +1,16 @@
 <?php require_once('../bd/PDO.php');?>
 <?php require_once('../include/class.usuario.php');?>
 <?php
-/*
-$user=newUsuario();
+
+$user=new Usuario();
+
+//test
+$_SESSION['Logado'] = true;
+$_SESSION['nome'] = 'maicom';
+$user->Cargo(1);
+$_SESSION['usuario_id'] = 1;
+$user->sessaoLimite(1000);
+///test
 
 $status=$user->Logado();
 
@@ -11,13 +19,21 @@ if(!$status)
 	$user->retorna_com_aviso('Não possui privilegios para acessar esta página!');
 	exit;
 }
-*/
+
+echo "k";
 
 if(isset($_GET['CriarAnuncio']))
 {
-	$a=new Banco();	
-	$a->cria_anuncio();
+	print_r($user->requer('anunciante'));
 
+	$a=new Banco();	
+
+	if($a->cria_anuncio(randomID(8),$user->obterID()) === true)
+		$user->retorna_com_aviso('Anuncio Criado!','-');
+	else
+		$user->retorna_com_aviso('Falha ao criar o anuncio!','-');
+
+	exit;
 }
 
 if(isset($_GET['AddProduct'])){
@@ -30,14 +46,12 @@ if(isset($_GET['AddProduct'])){
 		if(!isset($data[$i]))continue;
 			$data[$i]=$c;
 	}
-	$data['criador_id']=$user->obter_id();
+	$data['criador_id']=$user->obterID();
 
 
 	$a->atualizar_todo_anuncio('123123',$data);
 
 	$smt->execute();
-
-	echo$random;
 
 	exit;
 }
@@ -58,7 +72,7 @@ if(isset($_GET['ModifyProduct'])){
 	}
 	
 	$imagens='';
-	foreach($_FILES['file']['error']as$key=>$error){
+	foreach($_FILES['file']['error'] as $key=>$error){
 
 		$ext='.jpg';
 
@@ -76,15 +90,13 @@ if(isset($_GET['ModifyProduct'])){
 	exit;
 }
 
-function randomID($a){
+function randomID($max){
 	$a='';
-	for($i=0;$i<7;$i++){
+	for($i=0;$i<$max;$i++){
 		$a.=random_int(0,9);
 	}
 	return$a;
 }
-
-
 
 http_response_code(400);
 

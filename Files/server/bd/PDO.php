@@ -97,11 +97,6 @@ class Banco{
 
 		$tmp["id"] = $anuncioid;
 
-		echo "<pre>$sql<hr>";
-		print_r($tmp);
-		echo "</pre>";
-
-
 		$this->query($sql,$tmp);
 	}
 
@@ -248,7 +243,7 @@ class Banco{
 
 		$t->execute();
 
-		return false;
+		return true;
 	}
 
 	private function query(string $sql, array $dados=array())
