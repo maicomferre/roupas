@@ -31,7 +31,8 @@
 		</div>
 		<br /><br />
 			<div class="Conteudo">
-				<span id="alerta_erro" style="#display:none;">Erro! Um erro errado está calsando algum erro estranhamente errado que não esta certo</span>
+				<span id="alerta_erro" style="#display:none;">Erro! Ative o Javascript</span>
+				<span id="alerta_aviso" style="#display:none;">Erro! Ative o Javascript</span>
 				<div class="anterior" style="display:none;">
 				
 				</div>
@@ -40,8 +41,8 @@
 						<h1>Adicionar um novo produto</h1>
 						<h2>Você está prestes a adicionar um produto</h2>
 						
-						<!--<h4>Lembre-se que não é necessário preencher tudo agora<br />Você pode começar
-						o pre-cadastro e continuar mais tarde</h4>-->
+						<h4>Lembre-se que não é necessário preencher tudo agora<br />Você pode começar
+						o pre-cadastro e continuar mais tarde</h4>
 					</center>
 					<br /><br /><br />
 				</div>

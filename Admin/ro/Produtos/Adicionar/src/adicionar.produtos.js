@@ -1,11 +1,26 @@
 var Produto = {};
 Produto['Imagem'] = Array(); 
+Produto['anuncio_falhou'] = false;
 var ElementoEmErro = undefined;
 
 var tamanhoDisponivelUsadoProd = 0;
 
 var loaded = false;
 $(document).ready(function(){
+	if(Produto['anuncio_falhou'] == false)
+	$.ajax({
+		url:'/Files/server/Request/admin.php?CriarAnuncio',
+		method:'GET',
+		success:function(data){
+			if(data.length != 8)
+			{
+				MessageEx('#opt_0',"<b>Não Foi possível gerar o anuncio!!</b> Mensagem: "+ data);
+				Produto['anuncio_falhou'] = true;
+				return false;
+			}
+			cria_aviso(data);
+		}
+	});	
 	loaded = true;
 
 	$(document).keypress(function(e){
@@ -24,7 +39,7 @@ function view(opt){
 		if(validar_opcao(view_opt-1) === false)return false;
 		
 		if(view_opt >= 1){
-			$('#btn0').html('Próximo');			
+			$('#btn0').html('Próximo');
 		}
 		
 		$('#opt_'+(view_opt-1)).toggle('slow');
@@ -56,8 +71,22 @@ function view(opt){
 
 	return 1;
 }
+
+function cria_aviso(aviso)
+{
+	$('#alerta_aviso').html(aviso);
+	$('#alerta_aviso').show('slow');
+	setTimeout(function(){
+		$('#alerta_aviso').hide('slow');
+	},6000);
+}
 function validar_opcao(opt)
 {
+	if(Produto['anuncio_falhou'])
+	{
+		MessageEx('#opt_'+opt,"Houve um erro na criação do anuncio! Corriga o erro para continuar.");
+		return false;
+	}
 	if(opt == 1)
 	{
 		var prod_name = document.getElementById('produto_nome');

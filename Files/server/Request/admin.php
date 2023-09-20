@@ -7,31 +7,31 @@ $user=new Usuario();
 //test
 $_SESSION['Logado'] = true;
 $_SESSION['nome'] = 'maicom';
-$user->Cargo(1);
+$user->Cargo(4);
 $_SESSION['usuario_id'] = 1;
-$user->sessaoLimite(1000);
+//$user->sessaoLimite(1000);
 ///test
 
-$status=$user->Logado();
 
-if(!$status)
-{
+
+$status=$user->Logado();
+if($status === false)
+{	
 	$user->retorna_com_aviso('Não possui privilegios para acessar esta página!');
 	exit;
 }
 
-echo "k";
-
 if(isset($_GET['CriarAnuncio']))
 {
-	print_r($user->requer('anunciante'));
+	//print_r($user->requer('anunciante'));
 
-	$a=new Banco();	
+	$a=new Banco();
 
-	if($a->cria_anuncio(randomID(8),$user->obterID()) === true)
-		$user->retorna_com_aviso('Anuncio Criado!','-');
+	$id = randomID(8);
+	if($a->cria_anuncio($id,$user->obterID()) === true)
+		echo $id;
 	else
-		$user->retorna_com_aviso('Falha ao criar o anuncio!','-');
+		echo ('Falha ao criar o anuncio!');
 
 	exit;
 }
@@ -98,6 +98,6 @@ function randomID($max){
 	return$a;
 }
 
-http_response_code(400);
+#http_response_code(400);
 
 ?>

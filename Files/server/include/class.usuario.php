@@ -23,6 +23,10 @@ class Usuario
 	{
 		return $_SESSION['usuario_id'];
 	}
+	function Nome()
+	{
+		return $_SESSION['nome'];
+	}
 
 	function Logar(string $usuarioemail,string $senha)
 	{
@@ -110,12 +114,12 @@ class Usuario
 	{
 		$logado = $_SESSION['Logado'] ?? false;
 		if($logado === true){
-			if(!isset($_SESSION['CLogado'])){
+			/*if(!isset($_SESSION['CLogado'])){
 				if($_SESSION['limite'] < time()){
 					$this->Deslogar();
 					return false;
 				}
-			}
+			}*/
 			return true;
 		}
 		return false;
