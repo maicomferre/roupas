@@ -7,20 +7,29 @@ var tamanhoDisponivelUsadoProd = 0;
 
 var loaded = false;
 $(document).ready(function(){
-	if(Produto['anuncio_falhou'] == false)
 	$.ajax({
 		url:'/Files/server/Request/admin.php?CriarAnuncio',
 		method:'GET',
 		success:function(data){
-			if(data.length != 8)
+			if(data['id'] === undefined && data['anuncios'] === undefined)
 			{
 				MessageEx('#opt_0',"<b>Não Foi possível gerar o anuncio!!</b> Mensagem: "+ data);
 				Produto['anuncio_falhou'] = true;
-				return false;
 			}
-			cria_aviso(data);
+
+			if(data['id'] !== undefined)
+			{
+				$('#aviso_fixo').show(500);
+				$('#anuncioid').html(data['id']);
+			}
+			else if(data['anuncios'] !== undefined)
+			{
+				cria_aviso("Você possuí anuncios pendentes e por isso não pode criar novos anuncios! Ação: <b>Anuncio não criado</b>");
+				Produto['anuncio_falhou'] = true;
+			}
 		}
 	});	
+
 	loaded = true;
 
 	$(document).keypress(function(e){

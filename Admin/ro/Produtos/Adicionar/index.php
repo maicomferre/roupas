@@ -1,3 +1,8 @@
+<?php require_once('../../../../Files/server/include/class.usuario.php'); ?>
+<?php
+$u = new Usuario();
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
@@ -31,8 +36,10 @@
 		</div>
 		<br /><br />
 			<div class="Conteudo">
-				<span id="alerta_erro" style="#display:none;">Erro! Ative o Javascript</span>
-				<span id="alerta_aviso" style="#display:none;">Erro! Ative o Javascript</span>
+				<span id="aviso_fixo" style="display:none;"><b>Anuncio</b> #<span id="anuncioid"></span> 
+				&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $u->Nome(); ?> </span><br>
+				<span id="alerta_erro" style="display:none;">Erro! Ative o Javascript</span>
+				<span id="alerta_aviso" style="display:none;">Erro! Ative o Javascript</span>
 				<div class="anterior" style="display:none;">
 				
 				</div>

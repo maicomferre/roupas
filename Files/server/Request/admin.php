@@ -8,7 +8,7 @@ $user=new Usuario();
 $_SESSION['Logado'] = true;
 $_SESSION['nome'] = 'maicom';
 $user->Cargo(4);
-$_SESSION['usuario_id'] = 1;
+$_SESSION['usuario_id'] = 4;
 //$user->sessaoLimite(1000);
 ///test
 
@@ -25,13 +25,22 @@ if(isset($_GET['CriarAnuncio']))
 {
 	//print_r($user->requer('anunciante'));
 
+	if($user->anunciosEmAberto() > 0)
+	{
+		header('Content-Type: application/json;');
+		echo json_encode($user->listarAnunciosEmAberto());
+		exit;
+	}
+
 	$a=new Banco();
 
 	$id = randomID(8);
 	if($a->cria_anuncio($id,$user->obterID()) === true)
-		echo $id;
-	else
-		echo ('Falha ao criar o anuncio!');
+	{
+		header('Content-Type: application/json;');
+		echo json_encode(array("id" => $id));
+	}else
+		echo 'Falha ao criar o anuncio!';
 
 	exit;
 }

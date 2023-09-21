@@ -14,7 +14,6 @@ class Usuario
 	function __construct()
 	{
 		if(session_status() !== PHP_SESSION_ACTIVE){
-			session_name(hash('sha1',base64_encode(random_bytes(8))));			
 			session_start();
 		}
 	}
@@ -30,6 +29,7 @@ class Usuario
 
 	function Logar(string $usuarioemail,string $senha)
 	{
+		session_name(hash('sha1',base64_encode(random_bytes(8))));
 		if($this->Logado()){
 			echo "logado!";
 			return true;
@@ -196,6 +196,17 @@ class Usuario
 			header((($retorno === "/") ? ("/") : $retorno) );
 	}
 
+
+	function anunciosEmAberto()
+	{
+		//enumerar lista de anuncios criados pelo usuário que ainda estão incompletos
+		return 0;
+	}
+	function listarAnunciosEmAberto()
+	{
+		//Listar os Anuncios em abertos criados pelo usuário
+		return array("anuncios" => array());
+	}
 }
 
 ?>
